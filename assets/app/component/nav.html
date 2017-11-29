@@ -1,4 +1,48 @@
-
 <p>Name: {{name}}</p>
 <p>Email:{{email}}</p>
-<button (click)="click()"></button>
+
+<div *ngIf="showDialog1">
+    <input type="search" #x [(ngModel)]="My_X"  placeholder="X">
+    <input type="search" #y [(ngModel)]="My_Y">
+    <input type="search" #lable>
+    <input type="search" #name>
+    <button (click)="geo()">geo</button>
+
+    <button (click)="addPublic(x.value,y.value,lable.value,name.value)">all</button>
+    <button (click)="addPrivate(x.value,y.value,lable.value,name.value)">Private</button>
+
+</div>
+<button (click)="showDialog1=!showDialog1">Add point</button>
+
+<button (click)="showprivat()">Show my point</button>
+<button (click)="showPublic()">Show all point</button>
+
+
+<sebm-google-map
+        (mapClick)="mapClicked($event)"
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="zoom">
+
+
+    <sebm-google-map-marker
+            *ngFor="let m of test_marker; let i = index"
+            [latitude]="m.x"
+            [longitude]="m.y">
+
+        <sebm-google-map-info-window>
+            <strong>{{m.name}}</strong>
+            <button (click)="dell(m.id)">dell</button>
+
+        </sebm-google-map-info-window>
+
+    </sebm-google-map-marker>
+</sebm-google-map>
+
+<style>
+    .sebm-google-map-container {
+        height: 600px;
+
+    }
+
+</style>

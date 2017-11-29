@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "./app.component", "@angular/http"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "@angular/platform-browser", "./app.component", "@angular/http", "angular2-google-maps/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,11 +7,14 @@ System.register(["@angular/core", "@angular/platform-browser", "./app.component"
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, platform_browser_1, app_component_1, http_1, AppModule;
+    var core_1, forms_1, platform_browser_1, app_component_1, http_1, core_2, googleMapsCore, AppModule;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             },
             function (platform_browser_1_1) {
                 platform_browser_1 = platform_browser_1_1;
@@ -21,15 +24,21 @@ System.register(["@angular/core", "@angular/platform-browser", "./app.component"
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (core_2_1) {
+                core_2 = core_2_1;
             }
         ],
         execute: function () {
+            googleMapsCore = core_2.AgmCoreModule.forRoot({
+                apiKey: 'AIzaSyBGDB6yrcAbiygl1ONUANsMXP8gAV9Vc3M',
+            });
             AppModule = class AppModule {
             };
             AppModule = __decorate([
                 core_1.NgModule({
                     declarations: [app_component_1.AppComponent],
-                    imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
+                    imports: [platform_browser_1.BrowserModule, http_1.HttpModule, googleMapsCore, forms_1.FormsModule],
                     bootstrap: [app_component_1.AppComponent],
                 })
             ], AppModule);

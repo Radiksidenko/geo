@@ -10,6 +10,7 @@ angular.module('SignupMod').controller('SignupCtrl',['$scope', '$http', function
 			email: $scope.email,
 			password: $scope.password
 		})
+
 		.then(function onSuccess(response){
 			window.location = '/dashboard'
 		})

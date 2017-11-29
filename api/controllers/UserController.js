@@ -7,6 +7,7 @@
 
 module.exports = {
     // Sign User Up
+
     signup: function (req, res) {
         console.log('Backend Signup');
 
@@ -109,12 +110,11 @@ module.exports = {
     update: function (req, res) {
 
         User.update({id: req.session.me,},{name:req.param('name')}).exec(function afterwards(err, updated){
-//req.param('name')
+
             if (err) {
                 // handle error here- e.g. `res.serverError(err);`
                 return;
             }
-
             console.log('Updated user to have name ' + updated[0].id);
         });
     }

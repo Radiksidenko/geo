@@ -7,8 +7,18 @@ module.exports.routes = {
     'GET /getuser': 'DashController.getUser_by_id',
     'GET /getuser_me': 'DashController.getUser',
     'GET /logout': 'UserController.logout',
+    'POST /point': 'PointController.point',
+    'GET /get_point': 'PointController.getPoint',
+
     'POST /signup': 'UserController.signup',
     'POST /update': 'UserController.update',
-    'PUT /login': 'UserController.login'
+    'PUT /login': 'UserController.login',
+
+    'POST /private_point': 'PointController.privatePoint',
+    'GET /get_my_point': 'PointController.getMyPoint',
+    'POST /deletePoint' :'PointController.deletePoint',
+
+
+    'GET /user':  function(req, res) { return res.send('hello!'); }
 
 };
