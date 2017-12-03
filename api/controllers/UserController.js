@@ -48,9 +48,7 @@ module.exports = {
 
                             console.log('User Added');
 
-                            return res.json({
-                                id: newUser.id
-                            });
+                            return res.redirect('/' );;
                         })
                     }
                 })
@@ -87,7 +85,7 @@ module.exports = {
                         req.session.me = user.id;
 
                         console.log('SUCCESS');
-                        return res.ok();
+                        return res.redirect('/dashboard' );
                     }
                 })
             })
@@ -109,7 +107,7 @@ module.exports = {
     },
     update: function (req, res) {
 
-        User.update({id: req.session.me,},{name:req.param('name')}).exec(function afterwards(err, updated){
+        User.update({id: req.session.me,}, {name: req.param('name')}).exec(function afterwards(err, updated) {
 
             if (err) {
                 // handle error here- e.g. `res.serverError(err);`

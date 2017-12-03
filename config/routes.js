@@ -12,7 +12,7 @@ module.exports.routes = {
 
     'POST /signup': 'UserController.signup',
     'POST /update': 'UserController.update',
-    'PUT /login': 'UserController.login',
+    'POST /login': 'UserController.login',
 
     'POST /private_point': 'PointController.privatePoint',
     'GET /get_my_point': 'PointController.getMyPoint',
