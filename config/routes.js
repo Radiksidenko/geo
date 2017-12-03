@@ -15,7 +15,9 @@ module.exports.routes = {
     'PUT /login': 'UserController.login',
 
     'POST /private_point': 'PointController.privatePoint',
-    'GET /get_my_point': 'PointController.getMyPoint',
+    'GET /get_my_point': 'PointController.getMyPrivatePoint',
+    'GET /get_My_Public_point': 'PointController.getMyPublicPoint',
+
     'POST /deletePoint' :'PointController.deletePoint',
 
 
