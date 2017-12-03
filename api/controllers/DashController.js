@@ -19,7 +19,7 @@ module.exports = {
 
             var firstQuery = {
                 where: {id: req.session.me},
-                select: ['name', 'email', 'lastLoggedIn', 'gravatarUrl']
+                select: ['name', 'email', 'lastLoggedIn', 'gravatarUrl','id']
             };
             User.findOne(firstQuery, function (err, user) {
                 if (err) {

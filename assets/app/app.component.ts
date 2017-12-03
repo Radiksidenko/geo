@@ -13,6 +13,7 @@ export class AppComponent {
     zoom: number = 13;
     name;
     email;
+    id;
     My_Y = 0;
     My_X = 0;
 
@@ -60,6 +61,8 @@ export class AppComponent {
         io.socket.get('/getuser_me', function gotResponse(body, response) {
             reference.name = body.name;
             reference.email = body.email;
+            reference.id = body.id;
+
         });
 
         io.socket.get('/get_point', function gotResponse(body, response) {
@@ -74,7 +77,7 @@ export class AppComponent {
 
     addPublic(x, y, lable: string, name: string) {
         var reference = this;
-        io.socket.post('/point', {x: x, y: y, lable: lable, name: name}, function (resData, jwRes) {
+        io.socket.post('/point', {x: x, y: y, lable: 'Pu', name: name}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
             reference.showPublic();
         });
@@ -84,9 +87,9 @@ export class AppComponent {
 
     addPrivate(x, y, lable: string, name: string) {
         var reference = this;
-        io.socket.post('/private_point', {x: x, y: y, lable: lable, name: name}, function (resData, jwRes) {
+        io.socket.post('/private_point', {x: x, y: y, lable: 'Pr', name: name}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
-            reference.showprivat();
+            reference.showMyPrivat();
         });
 
     }
@@ -126,7 +129,7 @@ export class AppComponent {
 
     }
 
-    showprivat() {
+    showMyPrivat() {
         var reference = this;
 
         io.socket.get('/get_my_point', function gotResponse(body, response) {
@@ -144,6 +147,12 @@ export class AppComponent {
 
     }
 
+    showMyPublic(){
+        var reference = this;
+        io.socket.get('/get_My_Public_point', function gotResponse(body, response) {
+            reference.test_marker = body;
+        });
+    }
     dell(id){
         var reference = this;
         io.socket.post('/deletePoint', {id: id}, function (resData, jwRes) {

@@ -18,6 +18,13 @@ module.exports = {
         name: {
             type: 'string',
             required: true
+        },
+        owner:{
+            type: 'int',
+        },
+        type:{
+            type: 'string',
+            required: true
         }
     }
 };

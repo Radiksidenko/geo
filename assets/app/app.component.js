@@ -63,6 +63,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
                         reference.name = body.name;
                         reference.email = body.email;
+                        reference.id = body.id;
                     });
                     io.socket.get('/get_point', function gotResponse(body, response) {
                         reference.test_marker = body;
@@ -72,16 +73,16 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                 }
                 addPublic(x, y, lable, name) {
                     var reference = this;
-                    io.socket.post('/point', { x: x, y: y, lable: lable, name: name }, function (resData, jwRes) {
+                    io.socket.post('/point', { x: x, y: y, lable: 'Pu', name: name }, function (resData, jwRes) {
                         console.log(jwRes.statusCode); // => 200
                         reference.showPublic();
                     });
                 }
                 addPrivate(x, y, lable, name) {
                     var reference = this;
-                    io.socket.post('/private_point', { x: x, y: y, lable: lable, name: name }, function (resData, jwRes) {
+                    io.socket.post('/private_point', { x: x, y: y, lable: 'Pr', name: name }, function (resData, jwRes) {
                         console.log(jwRes.statusCode); // => 200
-                        reference.showprivat();
+                        reference.showMyPrivat();
                     });
                 }
                 geo() {
@@ -113,7 +114,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     console.log($event.coords.lat);
                     console.log($event.coords.lng);
                 }
-                showprivat() {
+                showMyPrivat() {
                     var reference = this;
                     io.socket.get('/get_my_point', function gotResponse(body, response) {
                         reference.test_marker = body;
@@ -124,6 +125,12 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                 showPublic() {
                     var reference = this;
                     io.socket.get('/get_point', function gotResponse(body, response) {
+                        reference.test_marker = body;
+                    });
+                }
+                showMyPublic() {
+                    var reference = this;
+                    io.socket.get('/get_My_Public_point', function gotResponse(body, response) {
                         reference.test_marker = body;
                     });
                 }

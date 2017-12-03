@@ -14,7 +14,8 @@
 </div>
 <button (click)="showDialog1=!showDialog1">Add point</button>
 
-<button (click)="showprivat()">Show my point</button>
+<button (click)="showMyPrivat()">Show my private point</button>
+<button (click)="showMyPublic()">Show my public point</button>
 <button (click)="showPublic()">Show all point</button>
 
 
@@ -25,10 +26,13 @@
         [zoom]="zoom">
 
 
+
+
     <sebm-google-map-marker
             *ngFor="let m of test_marker; let i = index"
             [latitude]="m.x"
-            [longitude]="m.y">
+            [longitude]="m.y"
+            [iconUrl]= "m.owner == id ? m.lable=='Pr'?'/images/map-marker-icon-pri.png':'/images/map-marker-icon.png':''">
 
         <sebm-google-map-info-window>
             <strong>{{m.name}}</strong>

@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-    // Sign User Up
+
 
     point: function (req, res) {
         console.log('point');
@@ -16,7 +16,10 @@ module.exports = {
             x: req.param('x'),
             y: req.param('y'),
             lable: req.param('lable'),
-            name: req.param('name')
+            name: req.param('name'),
+            type: 'public',
+            owner: req.session.me
+
         }, function pointCreated(err) {
             if (err) {
                 console.log('Error: ' + err);
@@ -30,43 +33,16 @@ module.exports = {
             return res.json([]);
         })
     },
-    getPoint: function (req, res) {
-        var firstQuery = {
-            select: ['x', 'y', 'lable', 'name','id']
-        };
-        Point.find(firstQuery,function (err, point) {
-            if (err) {
-                res.negotiate(err);
-            }
-
-            return res.json(point);
-        })
-
-    },
-
-    getMyPoint: function (req, res) {
-        var firstQuery = {
-            where: {owner: req.session.me},
-            select: ['x', 'y', 'lable', 'name','id']
-        };
-        PrivatPoint.find(firstQuery,function (err, point) {
-            if (err) {
-                res.negotiate(err);
-            }
-
-            return res.json(point);
-        })
-
-    },
     privatePoint: function (req, res) {
         console.log('point');
 
-        PrivatPoint.create({
+        Point.create({
 
             x: req.param('x'),
             y: req.param('y'),
             lable: req.param('lable'),
             name: req.param('name'),
+            type: 'private',
             owner: req.session.me
         }, function pointCreated(err) {
             if (err) {
@@ -79,8 +55,53 @@ module.exports = {
         })
     },
 
-    deletePoint: function (req,res) {
-       Point.destroy({id: req.param('id')}).exec(function (err){
+    getPoint: function (req, res) {
+        var firstQuery = {
+            where: {type: 'public'},
+            select: ['x', 'y', 'lable', 'name', 'id','owner']
+        };
+        Point.find(firstQuery, function (err, point) {
+            if (err) {
+                res.negotiate(err);
+            }
+
+            return res.json(point);
+        })
+
+    },
+    getMyPrivatePoint: function (req, res) {
+        var firstQuery = {
+            where: {type: 'private',owner: req.session.me},
+            select: ['x', 'y', 'lable', 'name', 'id', 'owner']
+        };
+        Point.find(firstQuery, function (err, point) {
+            if (err) {
+                res.negotiate(err);
+            }
+
+            return res.json(point);
+        })
+
+    },
+    getMyPublicPoint: function (req, res) {
+        var firstQuery = {
+            where: {type: 'public',owner: req.session.me},
+            select: ['x', 'y', 'lable', 'name', 'id','owner']
+        };
+        Point.find(firstQuery, function (err, point) {
+            if (err) {
+                res.negotiate(err);
+            }
+
+            return res.json(point);
+        })
+
+    },
+
+
+
+    deletePoint: function (req, res) {
+        Point.destroy({id: req.param('id')}).exec(function (err) {
             if (err) {
                 return res.negotiate(err);
             }
@@ -88,7 +109,6 @@ module.exports = {
         });
 
     }
-
 
 
 };
