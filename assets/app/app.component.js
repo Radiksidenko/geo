@@ -71,6 +71,11 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         console.log(reference.test_marker);
                     });
                 }
+                update(type, value) {
+                    io.socket.post('/update', { [type]: value }, function (resData, jwRes) {
+                        console.log(jwRes.statusCode); // => 200
+                    });
+                }
                 addPublic(x, y, lable, name) {
                     var reference = this;
                     io.socket.post('/point', { x: x, y: y, lable: 'Pu', name: name }, function (resData, jwRes) {

@@ -106,8 +106,8 @@ module.exports = {
         })
     },
     update: function (req, res) {
-
-        User.update({id: req.session.me,}, {name: req.param('name')}).exec(function afterwards(err, updated) {
+        var data = req.allParams();
+        User.update({id: req.session.me,}, data).exec(function afterwards(err, updated) {
 
             if (err) {
                 // handle error here- e.g. `res.serverError(err);`

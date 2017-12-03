@@ -75,6 +75,11 @@ export class AppComponent {
 
     }
 
+    update(type:string,value){
+        io.socket.post('/update', {[type]: value}, function (resData, jwRes) {
+            console.log(jwRes.statusCode); // => 200
+        });
+    }
     addPublic(x, y, lable: string, name: string) {
         var reference = this;
         io.socket.post('/point', {x: x, y: y, lable: 'Pu', name: name}, function (resData, jwRes) {
