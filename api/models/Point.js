@@ -1,7 +1,7 @@
 module.exports = {
     schema: true,
     connection: 'mainMySQL',
-    //migrate: 'drop',
+    migrate: 'drop',
     attributes: {
         x: {
             type: 'float',

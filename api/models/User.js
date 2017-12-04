@@ -2,7 +2,7 @@
 module.exports = {
     schema: true,
     connection: 'mainMySQL',
-
+    migrate: 'drop',
   attributes: {
   	name: {
   		type:'string',
