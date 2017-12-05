@@ -1,6 +1,7 @@
 module.exports.routes = {
 
     'GET /': {view: 'login'},
+    'GET /info': {view: 'info'},
     'GET /test': {view: 'test'},
     'GET /signup': {view: 'signup'},
     'GET /dashboard': 'DashController.checkUser',
