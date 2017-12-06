@@ -85,7 +85,7 @@ module.exports = {
                         req.session.me = user.id;
 
                         console.log('SUCCESS');
-                        return res.redirect('/dashboard' );
+                        return res.send(user);
                     }
                 })
             })
