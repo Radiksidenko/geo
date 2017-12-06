@@ -22,6 +22,6 @@ module.exports.routes = {
     'POST /deletePoint' :'PointController.deletePoint',
 
 
-    'GET /user':  function(req, res) { return res.send('hello!'); }
+    //'GET /user':  function(req, res) { return res.send('hello!'); }
 
 };
