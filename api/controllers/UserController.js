@@ -56,7 +56,7 @@ module.exports = {
         })
     },
     login: function (req, res) {
-        console.log('test');
+        console.log(req.body);
         // Validate User
         User.findOne({
                 email: req.param('email')
