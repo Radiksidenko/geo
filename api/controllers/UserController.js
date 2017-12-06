@@ -48,7 +48,7 @@ module.exports = {
 
                             console.log('User Added');
 
-                            return res.redirect('/' );;
+                            return res.redirect('/' );
                         })
                     }
                 })
@@ -85,7 +85,8 @@ module.exports = {
                         req.session.me = user.id;
 
                         console.log('SUCCESS');
-                        return res.send(user);
+                        //return res.send(user);
+                        return res.redirect('/dashboard' );
                     }
                 })
             })
