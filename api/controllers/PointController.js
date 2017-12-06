@@ -70,17 +70,25 @@ module.exports = {
 
     },
     getMyPrivatePoint: function (req, res) {
-        var firstQuery = {
-            where: {type: 'private',owner: req.session.me},
-            select: ['x', 'y', 'lable', 'name', 'id', 'owner']
-        };
-        Point.find(firstQuery, function (err, point) {
-            if (err) {
-                res.negotiate(err);
-            }
 
-            return res.json(point);
-        })
+        if (!req.session.me) {
+            console.log('You are NOT logged in');
+            return res.view('login');
+        } else {
+
+
+            var firstQuery = {
+                where: {type: 'private', owner: req.session.me},
+                select: ['x', 'y', 'lable', 'name', 'id', 'owner']
+            };
+            Point.find(firstQuery, function (err, point) {
+                if (err) {
+                    res.negotiate(err);
+                }
+
+                return res.json(point);
+            })
+        }
 
     },
     getMyPublicPoint: function (req, res) {
@@ -90,7 +98,7 @@ module.exports = {
         };
         Point.find(firstQuery, function (err, point) {
             if (err) {
-                res.negotiate(err);
+                console.log(err);
             }
 
             return res.json(point);
