@@ -1,0 +1,56 @@
+<!--<p>Name: {{name}}</p>-->
+<!--<p>Email:{{email}}</p>-->
+<!--<input (keyup.enter)="update('name',Name.value)" type="search" #Name [(ngModel)]="name">-->
+<!--<input (keyup.enter)="update('email',Email.value)" type="search" #Email [(ngModel)]="email">-->
+
+<!--<div *ngIf="showDialog1">-->
+    <!--<input type="search" #x [(ngModel)]="My_X"  placeholder="X">-->
+    <!--<input type="search" #y [(ngModel)]="My_Y">-->
+    <!--<input type="search" #lable>-->
+    <!--<input type="search" #name>-->
+    <!--<button (click)="geo()">geo</button>-->
+
+    <!--<button (click)="addPublic(x.value,y.value,lable.value,name.value)">all</button>-->
+    <!--<button (click)="addPrivate(x.value,y.value,lable.value,name.value)">Private</button>-->
+
+<!--</div>-->
+<!--<button (click)="showDialog1=!showDialog1">Add point</button>-->
+
+
+
+<sebm-google-map
+        (mapClick)="mapClicked($event)"
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="zoom">
+
+
+
+    <sebm-google-map-marker
+            *ngFor="let m of test_marker; let i = index"
+            [latitude]="m.x"
+            [longitude]="m.y"
+            [iconUrl]= "m.owner == id ? m.lable=='Pr'?'/images/private.png':'/images/my_public.png':'/images/public.png'">
+
+        <sebm-google-map-info-window>
+            <strong>{{m.name}}</strong>
+            <button (click)="dell(m.id)">dell</button>
+
+        </sebm-google-map-info-window>
+
+    </sebm-google-map-marker>
+</sebm-google-map>
+
+
+<div class="point">
+<button class="circle-button private" (click)="showMyPrivat()"><img src="/images/private.png"></button>
+<button class="circle-button my_public"(click)="showMyPublic()"><img src="/images/my_public.png"></button>
+<button class="circle-button public"(click)="showPublic()"><img src="/images/public.png"></button>
+</div>
+<style>
+    .sebm-google-map-container {
+        height: 100%;
+
+    }
+
+</style>

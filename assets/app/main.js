@@ -12,6 +12,7 @@ System.register(["@angular/platform-browser-dynamic", "./app.module"], function 
             }
         ],
         execute: function () {
+            //import {enableProdMode} from '@angular/core';
             platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule);
         }
     };

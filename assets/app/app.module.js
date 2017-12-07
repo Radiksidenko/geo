@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/forms", "@angular/platform-browser", "./app.component", "@angular/http", "angular2-google-maps/core"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "@angular/platform-browser", "./app.component", "@angular/http", "angular2-google-maps/core", "./app.routes", "./dashboard/dash.component"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/forms", "@angular/platform-browser",
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, forms_1, platform_browser_1, app_component_1, http_1, core_2, googleMapsCore, AppModule;
+    var core_1, forms_1, platform_browser_1, app_component_1, http_1, core_2, app_routes_1, dash_component_1, googleMapsCore, AppModule;
     return {
         setters: [
             function (core_1_1) {
@@ -27,6 +27,12 @@ System.register(["@angular/core", "@angular/forms", "@angular/platform-browser",
             },
             function (core_2_1) {
                 core_2 = core_2_1;
+            },
+            function (app_routes_1_1) {
+                app_routes_1 = app_routes_1_1;
+            },
+            function (dash_component_1_1) {
+                dash_component_1 = dash_component_1_1;
             }
         ],
         execute: function () {
@@ -37,8 +43,8 @@ System.register(["@angular/core", "@angular/forms", "@angular/platform-browser",
             };
             AppModule = __decorate([
                 core_1.NgModule({
-                    declarations: [app_component_1.AppComponent],
-                    imports: [platform_browser_1.BrowserModule, http_1.HttpModule, googleMapsCore, forms_1.FormsModule],
+                    declarations: [app_component_1.AppComponent, dash_component_1.DashComponent],
+                    imports: [app_routes_1.routing, platform_browser_1.BrowserModule, http_1.HttpModule, googleMapsCore, forms_1.FormsModule],
                     bootstrap: [app_component_1.AppComponent],
                 })
             ], AppModule);
