@@ -4,13 +4,15 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { HttpModule }      from '@angular/http';
 import { AgmCoreModule} from 'angular2-google-maps/core';
+import { routing } from './app.routes';
+import { DashComponent }      from './dashboard/dash.component';
 
 const googleMapsCore = AgmCoreModule.forRoot({
     apiKey : 'AIzaSyBGDB6yrcAbiygl1ONUANsMXP8gAV9Vc3M',
 });
 @NgModule({
-    declarations: [AppComponent],
-    imports:      [BrowserModule,HttpModule, googleMapsCore,FormsModule],
+    declarations: [AppComponent,DashComponent],
+    imports:      [routing,BrowserModule,HttpModule, googleMapsCore,FormsModule],
     bootstrap:    [AppComponent],
 })
 

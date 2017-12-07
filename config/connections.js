@@ -20,6 +20,8 @@ module.exports.connections = {
         database: 'heroku_a4dbc5c42274c3b',
         timezone: 'utc'
     },
-
+    localDiskDb: {
+        adapter: 'sails-disk'
+    }
 
 };

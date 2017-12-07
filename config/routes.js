@@ -1,6 +1,6 @@
 module.exports.routes = {
 
-    'GET /': {view: 'login'},
+    'GET /': 'DashController.login',
     'GET /info': {view: 'info'},
     'GET /test': {view: 'test'},
     'GET /signup': {view: 'signup'},
@@ -21,7 +21,11 @@ module.exports.routes = {
 
     'POST /deletePoint' :'PointController.deletePoint',
 
-    'GET /chat': {view: 'chat'},
+    'GET /chat': {view: 'general_views_page'},
+
+    'GET /messages': 'ChatController.messages',
+    'POST chat/sent': 'ChatController.addConv'
+
 
 
     //'GET /user':  function(req, res) { return res.send('hello!'); }
