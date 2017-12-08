@@ -4,20 +4,53 @@
 <!--<input (keyup.enter)="update('email',Email.value)" type="search" #Email [(ngModel)]="email">-->
 
 <!--<div *ngIf="showDialog1">-->
-    <!--<input type="search" #x [(ngModel)]="My_X"  placeholder="X">-->
-    <!--<input type="search" #y [(ngModel)]="My_Y">-->
-    <!--<input type="search" #lable>-->
-    <!--<input type="search" #name>-->
-    <!--<button (click)="geo()">geo</button>-->
+<!--<input type="search" #x [(ngModel)]="My_X"  placeholder="X">-->
+<!--<input type="search" #y [(ngModel)]="My_Y">-->
+<!--<input type="search" #lable>-->
+<!--<input type="search" #name>-->
+<!--<button (click)="geo()">geo</button>-->
 
-    <!--<button (click)="addPublic(x.value,y.value,lable.value,name.value)">all</button>-->
-    <!--<button (click)="addPrivate(x.value,y.value,lable.value,name.value)">Private</button>-->
+<!--<button (click)="addPublic(x.value,y.value,lable.value,name.value)">all</button>-->
+<!--<button (click)="addPrivate(x.value,y.value,lable.value,name.value)">Private</button>-->
 
 <!--</div>-->
 <!--<button (click)="showDialog1=!showDialog1">Add point</button>-->
+<header class="flex hero">
+    <div class="flex-left">
+        <div class="btn-round ripple menu" (click)="leftmtnu()"></div>
+    </div>
+    <!-- <div class="flex center d-o"> -->
+    <!-- <input placeholder="Search Stories"/> -->
+    <!-- </div> -->
+    <div class="flex-right">
+        <div title="Google Apps" class="btn-round ripple apps d-o"></div>
+        <div title="Google Notifications" class="btn-round ripple notifications d-o"></div>
+        <img (click)="menuUser()"
+             src="http://i1-news.softpedia-static.com/images/news2/the-new-google-logo-is-a-lesson-in-modern-design-490648-3.jpg"
+             class="btn-round profile d-o profile-tikla"/>
+        <div class="search-btn btn-round ripple m-o"></div>
+    </div>
 
+</header>
+<nav id="LM">
+    <ul *ngFor="let m of test_marker; let i = index">
+        <li (click)="info(i,m.x,m.y)">{{m.name}}</li>
+    </ul>
+    <ul>
+        <li (click)="close_all()">Close all</li>
+    </ul>
 
+</nav>
+<div class="menu-overlay"></div>
 
+<div class="account" id="account">
+    <ul>
+        <li class="ripple">Sign Out</li>
+        <li class="ripple">Switch account</li>
+        <li class="ripple">Send feedback</li>
+        <li class="ripple">Help</li>
+    </ul>
+</div>
 <sebm-google-map
         (mapClick)="mapClicked($event)"
         [latitude]="lat"
@@ -25,16 +58,15 @@
         [zoom]="zoom">
 
 
-
     <sebm-google-map-marker
             *ngFor="let m of test_marker; let i = index"
             [latitude]="m.x"
             [longitude]="m.y"
-            [iconUrl]= "m.owner == id ? m.lable=='Pr'?'/images/private.png':'/images/my_public.png':'/images/public.png'">
+            [iconUrl]="m.owner == id ? m.lable=='Pr'?'/images/private.png':'/images/my_public.png':'/images/public.png'">
 
-        <sebm-google-map-info-window>
+        <sebm-google-map-info-window [isOpen]="open[i]">
             <strong>{{m.name}}</strong>
-            <button (click)="dell(m.id)">dell</button>
+            <button class="dell" (click)="dell(m.id)">dell</button>
 
         </sebm-google-map-info-window>
 
@@ -43,9 +75,9 @@
 
 
 <div class="point">
-<button class="circle-button private" (click)="showMyPrivat()"><img src="/images/private.png"></button>
-<button class="circle-button my_public"(click)="showMyPublic()"><img src="/images/my_public.png"></button>
-<button class="circle-button public"(click)="showPublic()"><img src="/images/public.png"></button>
+    <button class="circle-button private" (click)="showMyPrivat()"><img src="/images/private.png"></button>
+    <button class="circle-button my_public" (click)="showMyPublic()"><img src="/images/my_public.png"></button>
+    <button class="circle-button public" (click)="showPublic()"><img src="/images/public.png"></button>
 </div>
 <style>
     .sebm-google-map-container {

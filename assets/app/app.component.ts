@@ -12,23 +12,7 @@ export class AppComponent {
     constructor(private activateRoute: ActivatedRoute) {
 
     }
-    leftmtnu(){
-        var menu = document.getElementById("LM");
 
-        if(menu.className == 'opened'){
-            menu.className = '';
-        }else {
-            menu.className = 'opened';
-        }
-    }
-    menuUser(){
-        var menu = document.getElementById("account");
-        if(menu.className == 'account active'){
-            menu.className = 'account';
-        }else {
-            menu.className = 'account active';
-        }
-    }
 }
 
 
