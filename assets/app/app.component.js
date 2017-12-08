@@ -25,24 +25,6 @@ System.register(["@angular/core", "@angular/router"], function (exports_1, conte
                 constructor(activateRoute) {
                     this.activateRoute = activateRoute;
                 }
-                leftmtnu() {
-                    var menu = document.getElementById("LM");
-                    if (menu.className == 'opened') {
-                        menu.className = '';
-                    }
-                    else {
-                        menu.className = 'opened';
-                    }
-                }
-                menuUser() {
-                    var menu = document.getElementById("account");
-                    if (menu.className == 'account active') {
-                        menu.className = 'account';
-                    }
-                    else {
-                        menu.className = 'account active';
-                    }
-                }
             };
             AppComponent = __decorate([
                 core_1.Component({

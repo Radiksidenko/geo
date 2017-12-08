@@ -25,39 +25,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     this.zoom = 13;
                     this.My_Y = 0;
                     this.My_X = 0;
-                    this.lal = [
-                        {
-                            x: 46.485556,
-                            y: 30.741667000000007,
-                            label: 'c',
-                            name: "kek"
-                        }
-                    ];
-                    this.markers = [
-                        {
-                            x: 46.488012,
-                            y: 30.73079860000007,
-                            label: 'A',
-                            name: "lal"
-                        },
-                        {
-                            x: 46.484583,
-                            y: 30.732600000000048,
-                            label: 'B',
-                            name: "lol"
-                        },
-                        {
-                            x: 46.485556,
-                            y: 30.741667000000007,
-                            label: 'c',
-                            name: "kek"
-                        },
-                        {
-                            x: 46.484941,
-                            y: 30.732995399999936,
-                            label: 'd'
-                        }
-                    ];
+                    this.open = [false];
                     this.test_marker = [];
                     var reference = this;
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
@@ -67,7 +35,6 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     });
                     io.socket.get('/get_point', function gotResponse(body, response) {
                         reference.test_marker = body;
-                        console.log(reference.markers);
                         console.log(reference.test_marker);
                     });
                     setInterval(function () {
@@ -125,7 +92,6 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     var reference = this;
                     io.socket.get('/get_my_point', function gotResponse(body, response) {
                         reference.test_marker = body;
-                        console.log(reference.markers);
                         console.log(reference.test_marker);
                     });
                 }
@@ -147,6 +113,38 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         console.log(jwRes.statusCode); // => 200
                         reference.showPublic();
                     });
+                }
+                leftmtnu() {
+                    var menu = document.getElementById("LM");
+                    if (menu.className == 'opened') {
+                        menu.className = '';
+                    }
+                    else {
+                        menu.className = 'opened';
+                    }
+                }
+                menuUser() {
+                    var menu = document.getElementById("account");
+                    if (menu.className == 'account active') {
+                        menu.className = 'account';
+                    }
+                    else {
+                        menu.className = 'account active';
+                    }
+                }
+                info(id, x, y) {
+                    var reference = this;
+                    reference.open[id] = true;
+                    reference.lat = x;
+                    reference.lng = y;
+                    reference.zoom = 16;
+                }
+                close_all() {
+                    var reference = this;
+                    reference.zoom = 13;
+                    for (var i = 1; i < reference.open.length; i++) {
+                        reference.open[i] = false;
+                    }
                 }
             };
             DashComponent = __decorate([
