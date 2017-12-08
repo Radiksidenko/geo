@@ -17,41 +17,7 @@ export class DashComponent {
     My_Y = 0;
     My_X = 0;
 
-    lal = [
-        {
-            x: 46.485556,
-            y: 30.741667000000007,
-            label: 'c',
-            name: "kek"
-        }
-    ]
-
-    markers = [
-        {
-            x: 46.488012,
-            y: 30.73079860000007,
-            label: 'A',
-            name: "lal"
-        },
-        {
-            x: 46.484583,
-            y: 30.732600000000048,
-            label: 'B',
-            name: "lol"
-        },
-        {
-            x: 46.485556,
-            y: 30.741667000000007,
-            label: 'c',
-            name: "kek"
-        },
-        {
-            x: 46.484941,
-            y: 30.732995399999936,
-            label: 'd'
-        }
-
-    ]
+    open = [false];
 
     test_marker = [];
 
@@ -67,7 +33,6 @@ export class DashComponent {
 
         io.socket.get('/get_point', function gotResponse(body, response) {
             reference.test_marker = body;
-            console.log(reference.markers);
             console.log(reference.test_marker);
 
 
@@ -76,11 +41,12 @@ export class DashComponent {
         }, 10);
     }
 
-    update(type:string,value){
+    update(type: string, value) {
         io.socket.post('/update', {[type]: value}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
         });
     }
+
     addPublic(x, y, lable: string, name: string) {
         var reference = this;
         io.socket.post('/point', {x: x, y: y, lable: 'Pu', name: name}, function (resData, jwRes) {
@@ -88,7 +54,6 @@ export class DashComponent {
             reference.showPublic();
         });
     }
-
 
 
     addPrivate(x, y, lable: string, name: string) {
@@ -140,7 +105,6 @@ export class DashComponent {
 
         io.socket.get('/get_my_point', function gotResponse(body, response) {
             reference.test_marker = body;
-            console.log(reference.markers);
             console.log(reference.test_marker);
         });
     }
@@ -153,18 +117,54 @@ export class DashComponent {
 
     }
 
-    showMyPublic(){
+    showMyPublic() {
         var reference = this;
         io.socket.get('/get_My_Public_point', function gotResponse(body, response) {
             reference.test_marker = body;
         });
     }
-    dell(id){
+
+    dell(id) {
         var reference = this;
         io.socket.post('/deletePoint', {id: id}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
             reference.showPublic();
         });
+    }
+
+    leftmtnu() {
+        var menu = document.getElementById("LM");
+
+        if (menu.className == 'opened') {
+            menu.className = '';
+        } else {
+            menu.className = 'opened';
+        }
+    }
+
+    menuUser() {
+        var menu = document.getElementById("account");
+        if (menu.className == 'account active') {
+            menu.className = 'account';
+        } else {
+            menu.className = 'account active';
+        }
+    }
+
+    info(id, x, y) {
+        var reference = this;
+        reference.open[id] = true;
+        reference.lat = x;
+        reference.lng = y;
+        reference.zoom = 16;
+    }
+    close_all() {
+        var reference = this;
+        reference.zoom = 13;
+        for(var i = 1; i<reference.open.length;i++){
+            reference.open[i] = false;
+        }
+
     }
 
 
