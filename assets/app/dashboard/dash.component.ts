@@ -16,7 +16,10 @@ export class DashComponent {
     id;
     My_Y = 0;
     My_X = 0;
-
+    now_X=46.488012;
+    now_Y=30.73079860000007;
+    add_point = false;
+    addpont = false;
     open = [false];
 
     test_marker = [];
@@ -47,7 +50,7 @@ export class DashComponent {
         });
     }
 
-    addPublic(x, y, lable: string, name: string) {
+    addPublic(x, y, name: string) {
         var reference = this;
         io.socket.post('/point', {x: x, y: y, lable: 'Pu', name: name}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
@@ -56,7 +59,7 @@ export class DashComponent {
     }
 
 
-    addPrivate(x, y, lable: string, name: string) {
+    addPrivate(x, y, name: string) {
         var reference = this;
         io.socket.post('/private_point', {x: x, y: y, lable: 'Pr', name: name}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
@@ -67,6 +70,8 @@ export class DashComponent {
 
     geo() {
         var reference = this;
+        reference.zoom = 13;
+
         var geoID;
         var options = {
             enableHighAccuracy: true,
@@ -79,22 +84,34 @@ export class DashComponent {
         }
 
         function watchPosition(position) {
+
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
-            reference.My_Y = lon;
-            reference.My_X = lat;
+            setgeo(position);
+            reference.zoom = 13;
 
             console.log("watching: " + lat + " " + lon);
         }
-
+        function setgeo(position){
+            reference.now_Y = position.coords.longitude;
+            reference.now_X = position.coords.latitude;
+            reference.lat = reference.now_X;
+            reference.lng = reference.now_Y;
+        }
         function geoLocationWatchPositionError(error) {
             console.warn('Geo Watch error:' + error.code + ' ' + error.message);
         }
     }
 
     mapClicked($event: MouseEvent) {
-        this.My_Y = $event.coords.lng;
-        this.My_X = $event.coords.lat;
+        if (this.add_point == true) {
+
+            this.My_Y = $event.coords.lng;
+            this.My_X = $event.coords.lat;
+            this.addpont = true;
+
+        }
+
         console.log($event.coords.lat);
         console.log($event.coords.lng);
 
@@ -158,15 +175,19 @@ export class DashComponent {
         reference.lng = y;
         reference.zoom = 16;
     }
+
     close_all() {
         var reference = this;
         reference.zoom = 13;
-        for(var i = 0; i<reference.open.length;i++){
+        for (var i = 0; i < reference.open.length; i++) {
             reference.open[i] = false;
         }
 
     }
 
+    add() {
+        this.add_point = true;
+    }
 
 }
 

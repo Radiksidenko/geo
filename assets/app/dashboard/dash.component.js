@@ -25,6 +25,10 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     this.zoom = 13;
                     this.My_Y = 0;
                     this.My_X = 0;
+                    this.now_X = 46.488012;
+                    this.now_Y = 30.73079860000007;
+                    this.add_point = false;
+                    this.addpont = false;
                     this.open = [false];
                     this.test_marker = [];
                     var reference = this;
@@ -45,14 +49,14 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         console.log(jwRes.statusCode); // => 200
                     });
                 }
-                addPublic(x, y, lable, name) {
+                addPublic(x, y, name) {
                     var reference = this;
                     io.socket.post('/point', { x: x, y: y, lable: 'Pu', name: name }, function (resData, jwRes) {
                         console.log(jwRes.statusCode); // => 200
                         reference.showPublic();
                     });
                 }
-                addPrivate(x, y, lable, name) {
+                addPrivate(x, y, name) {
                     var reference = this;
                     io.socket.post('/private_point', { x: x, y: y, lable: 'Pr', name: name }, function (resData, jwRes) {
                         console.log(jwRes.statusCode); // => 200
@@ -61,6 +65,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                 }
                 geo() {
                     var reference = this;
+                    reference.zoom = 13;
                     var geoID;
                     var options = {
                         enableHighAccuracy: true,
@@ -74,17 +79,26 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     function watchPosition(position) {
                         var lat = position.coords.latitude;
                         var lon = position.coords.longitude;
-                        reference.My_Y = lon;
-                        reference.My_X = lat;
+                        setgeo(position);
+                        reference.zoom = 13;
                         console.log("watching: " + lat + " " + lon);
+                    }
+                    function setgeo(position) {
+                        reference.now_Y = position.coords.longitude;
+                        reference.now_X = position.coords.latitude;
+                        reference.lat = reference.now_X;
+                        reference.lng = reference.now_Y;
                     }
                     function geoLocationWatchPositionError(error) {
                         console.warn('Geo Watch error:' + error.code + ' ' + error.message);
                     }
                 }
                 mapClicked($event) {
-                    this.My_Y = $event.coords.lng;
-                    this.My_X = $event.coords.lat;
+                    if (this.add_point == true) {
+                        this.My_Y = $event.coords.lng;
+                        this.My_X = $event.coords.lat;
+                        this.addpont = true;
+                    }
                     console.log($event.coords.lat);
                     console.log($event.coords.lng);
                 }
@@ -145,6 +159,9 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     for (var i = 0; i < reference.open.length; i++) {
                         reference.open[i] = false;
                     }
+                }
+                add() {
+                    this.add_point = true;
                 }
             };
             DashComponent = __decorate([
