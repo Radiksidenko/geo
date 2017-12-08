@@ -1,0 +1,12 @@
+<div>
+    <label>{{x}}</label>
+    {{y}}
+<input type="search" [(ngModel)]="x">
+<input type="search" [(ngModel)]="y">
+<input type="search" #lable>
+<input type="search" #name>
+<button (click)="geo()">geo</button>
+
+<button (click)="addPublic(x.value,y.value,lable.value,name.value)">add public</button>
+<button (click)="addPrivate(x.value,y.value,lable.value,name.value)">add private</button>
+</div>

@@ -21,10 +21,12 @@ module.exports.routes = {
 
     'POST /deletePoint' :'PointController.deletePoint',
 
-    'GET /chat': {view: 'general_views_page'},
+    'GET /chat': {view: 'chat'},
 
     'GET /messages': 'ChatController.messages',
-    'POST chat/sent': 'ChatController.addConv'
+    'POST chat/sent': 'ChatController.addConv',
+
+    'GET /profile': 'DashController.checkUser'
 
 
 

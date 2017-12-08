@@ -501,6 +501,7 @@ html, body {
 }
 
 .bottom-menu {
+    flex: 0 0 auto;
     display: block;
     position: fixed;
     left: 0;

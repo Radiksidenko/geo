@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
     // selector: 'my-app',
@@ -14,8 +14,8 @@ export class DashComponent {
     name;
     email;
     id;
-    My_Y = 0;
-    My_X = 0;
+    @Input() My_X = 0;
+    @Input() My_Y = 0;
 
     lal = [
         {
@@ -54,6 +54,8 @@ export class DashComponent {
     ]
 
     test_marker = [];
+
+    addPointOpen: boolean = false;
 
     constructor() {
         var reference = this;
@@ -132,7 +134,6 @@ export class DashComponent {
         this.My_X = $event.coords.lat;
         console.log($event.coords.lat);
         console.log($event.coords.lng);
-
     }
 
     showMyPrivat() {

@@ -46,6 +46,10 @@
 <button class="circle-button private" (click)="showMyPrivat()"><img src="/images/private.png"></button>
 <button class="circle-button my_public"(click)="showMyPublic()"><img src="/images/my_public.png"></button>
 <button class="circle-button public"(click)="showPublic()"><img src="/images/public.png"></button>
+<button class="circle-button addPoint"(click)="addPointOpen=!addPointOpen"><img src="/images/addPoint.png"></button>
+</div>
+<div *ngIf="addPointOpen">
+    <add-point [x]="My_X" [y]="My_Y" [addPointOpen]="addPointOpen"></add-point>
 </div>
 <style>
     .sebm-google-map-container {

@@ -7,7 +7,7 @@
 
 module.exports = {
     connection: 'localDiskDb',
-   // migrate: 'drop',
+    migrate: 'drop',
 attributes: {
     nickname: {
       type: 'string',

@@ -23,8 +23,8 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     this.lat = 46.488012;
                     this.lng = 30.73079860000007;
                     this.zoom = 13;
-                    this.My_Y = 0;
                     this.My_X = 0;
+                    this.My_Y = 0;
                     this.lal = [
                         {
                             x: 46.485556,
@@ -59,6 +59,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         }
                     ];
                     this.test_marker = [];
+                    this.addPointOpen = false;
                     var reference = this;
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
                         reference.name = body.name;
@@ -149,6 +150,14 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     });
                 }
             };
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", Object)
+            ], DashComponent.prototype, "My_X", void 0);
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", Object)
+            ], DashComponent.prototype, "My_Y", void 0);
             DashComponent = __decorate([
                 core_1.Component({
                     // selector: 'my-app',

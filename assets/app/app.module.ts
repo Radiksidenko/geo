@@ -6,12 +6,14 @@ import { HttpModule }      from '@angular/http';
 import { AgmCoreModule} from 'angular2-google-maps/core';
 import { routing } from './app.routes';
 import { DashComponent }      from './dashboard/dash.component';
+import { AddPointComponent} from "./add-point/add-point.component";
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 const googleMapsCore = AgmCoreModule.forRoot({
     apiKey : 'AIzaSyBGDB6yrcAbiygl1ONUANsMXP8gAV9Vc3M',
 });
 @NgModule({
-    declarations: [AppComponent,DashComponent],
+    declarations: [AppComponent,DashComponent,AddPointComponent,UserProfileComponent],
     imports:      [routing,BrowserModule,HttpModule, googleMapsCore,FormsModule],
     bootstrap:    [AppComponent],
 })

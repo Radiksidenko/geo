@@ -6,12 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent }      from './app.component';
 
 import { DashComponent }      from './dashboard/dash.component';
-
+import { UserProfileComponent} from './user-profile/user-profile.component';
 
 
 export const routes: Routes = [
-
-  {path: 'dashboard', component: DashComponent},
+    {path: 'profile', component: UserProfileComponent},
+    {path: 'dashboard', component: DashComponent},
 ];
 
 
