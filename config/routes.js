@@ -24,9 +24,9 @@ module.exports.routes = {
     'GET /chat': {view: 'general_views_page'},
 
     'GET /messages': 'ChatController.messages',
-    'POST chat/sent': 'ChatController.addConv'
+    'POST chat/sent': 'ChatController.addConv',
 
-
+    'GET /profile': 'DashController.checkUser'
 
     //'GET /user':  function(req, res) { return res.send('hello!'); }
 
