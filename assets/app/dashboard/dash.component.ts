@@ -161,7 +161,7 @@ export class DashComponent {
     close_all() {
         var reference = this;
         reference.zoom = 13;
-        for(var i = 1; i<reference.open.length;i++){
+        for(var i = 0; i<reference.open.length;i++){
             reference.open[i] = false;
         }
 
