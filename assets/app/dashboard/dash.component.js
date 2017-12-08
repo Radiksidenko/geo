@@ -142,7 +142,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                 close_all() {
                     var reference = this;
                     reference.zoom = 13;
-                    for (var i = 1; i < reference.open.length; i++) {
+                    for (var i = 0; i < reference.open.length; i++) {
                         reference.open[i] = false;
                     }
                 }
