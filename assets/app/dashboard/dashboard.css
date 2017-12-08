@@ -1,8 +1,37 @@
-.point{
+
+.but {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: #177fbc;
+    border-radius: 3px;
+}
+.butu{
+    width: 100px;
+    height: 100px;
+    background-color: #177fbc;
+    border-radius: 3px;
+}
+.butt{
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 317px;
+}
+
+.point {
     position: absolute;
     top: 68px;
     right: 0;
 }
+
 .circle-button {
     right: 0;
     margin: 0 15px 0 20px;
@@ -22,9 +51,11 @@
     position: absolute;
     outline: none !important;
 }
-.circle-button img{
+
+.circle-button img {
     width: 42px;
 }
+
 .circle-button::before {
     top: 0;
     bottom: 0;
@@ -64,6 +95,12 @@
     color: #ff7f00;
 }
 
+.add_point {
+    margin-top: 189px;
+}
+.geo {
+    margin-top: 252px;
+}
 
 header, footer, main, section, aside, nav {
     display: block;
@@ -80,10 +117,10 @@ body {
     background: #EEE;
 }
 
-
 .btn, .btn-round {
     cursor: pointer;
 }
+
 .btn-round {
     border-radius: 50%;
 }
@@ -94,29 +131,34 @@ body {
     display: -ms-flexbox;
     display: flex;
 }
+
 .flex-wrap {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
+
 .flex-left {
     -webkit-box-pack: start;
     -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
     justify-content: flex-start;
 }
+
 .flex-right {
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
     justify-content: flex-end;
 }
+
 .flex-inline {
     display: -webkit-inline-box;
     display: -webkit-inline-flex;
     display: -ms-inline-flexbox;
     display: inline-flex;
 }
+
 .flex-center {
     display: -webkit-box;
     display: -webkit-flex;
@@ -131,6 +173,7 @@ body {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
 .flex-between {
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
@@ -160,6 +203,7 @@ button, input {
     overflow: hidden;
     transform: translateZ(0);
 }
+
 .ripple .rippling {
     width: 5px;
     height: 5px;
@@ -174,9 +218,11 @@ button, input {
 .btn, .btn-round {
     cursor: pointer;
 }
+
 .btn-round {
     border-radius: 100%;
 }
+
 header {
     position: fixed;
     font-family: 'Comfortaa', cursive;
@@ -188,48 +234,56 @@ header {
     background: -webkit-linear-gradient(to right, #f857a6, #ff5858); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #f857a6, #ff5858); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-
     width: 100%;
     justify-content: space-between;
     align-items: center;
     color: white;
     transition: box-shadow .3s;
 }
+
 header .search-btn {
     width: 58px;
     height: 58px;
     margin-right: 10px;
     background: url(http://cbwconline.com/IMG/Codepen/Search-White.svg) center no-repeat;
 }
+
 @media (min-width: 701px) {
     header .m-o {
         display: none;
     }
 }
+
 @media (max-width: 700px) {
     header .d-o {
         display: none !important;
     }
+
     header .flex-right, header .flex-left {
         min-width: 0 !important;
     }
 }
+
 header.shadow {
     box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
 }
+
 header .flex, header .flex-wrap, header .flex-left, header .flex-right, header .flex-center, header .flex-between {
     align-items: center;
 }
+
 header .flex-left,
 header .flex-right {
     min-width: 170px;
 }
+
 header h2 {
     font: 400 26px 'Product Sans', 'Roboto';
     font-family: 'Comfortaa', cursive;
     position: relative;
     cursor: default;
 }
+
 header h2 span {
     padding-left: 18px;
     border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -240,19 +294,23 @@ header h2 span {
     top: 50%;
     transform: translateY(-50%);
 }
+
 header .flex-left .menu {
     width: 58px;
     height: 58px;
     margin-left: 10px;
     background: url(http://cbwconline.com/IMG/Codepen/Menu.svg) center no-repeat;
 }
+
 header .flex-left .logo {
     width: 30px;
 }
+
 header .flex-left .logo:first-of-type {
     width: 40px;
     margin-right: 6px;
 }
+
 header .center {
     width: 100%;
     max-width: 620px;
@@ -260,6 +318,7 @@ header .center {
     margin: 0 100px;
     position: relative;
 }
+
 header .center .search {
     width: 15px;
     height: 15px;
@@ -270,6 +329,7 @@ header .center .search {
     transform: translateY(-50%);
     transition: .3s;
 }
+
 header .center input {
     width: 100%;
     height: 100%;
@@ -293,6 +353,7 @@ header .flex-right [class^='btn'] {
 header .flex-right .apps {
     background: url(http://cbwconline.com/IMG/Codepen/Apps-White.svg) center/20px no-repeat;
 }
+
 header .flex-right .profile {
     width: 32px;
     height: 32px;
@@ -310,39 +371,47 @@ header .flex-right .profile {
     transform: translateY(100%);
     z-index: 200;
 }
+
 .ios-web-app .mobile-search {
     border-top: 20px solid #d0d0d0;
 }
+
 .mobile-search.searching {
     transform: translateY(0);
 }
+
 .mobile-search .header {
     background: #fff;
     height: 64px;
     box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
 }
+
 .mobile-search .header .back {
     width: 58px;
     height: 58px;
     margin-left: 10px;
     background: url(http://cbwconline.com/IMG/Codepen/Arrow-Back-Black.svg) center no-repeat;
 }
+
 .mobile-search .header input {
     color: #444;
     font-size: 16px;
     margin-left: 20px;
     width: calc(100vw - 100px);
 }
+
 .mobile-search .header input::-webkit-input-placeholder {
     color: #444;
     font-size: 16px;
     text-align: left;
 }
+
 .mobile-search .header input ::-moz-placeholder {
     color: rgba(255, 255, 255, 0.7);
     font-size: 16px;
     text-align: center;
 }
+
 .mobile-search .header input :-ms-input-placeholder {
     color: rgba(255, 255, 255, 0.7);
     font-size: 16px;
@@ -377,7 +446,6 @@ header .flex-right .profile {
     }
 }
 
-
 .account {
     background: #EEE;
     position: fixed;
@@ -391,6 +459,7 @@ header .flex-right .profile {
     transition: .15s;
     box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
 }
+
 .account:after {
     content: '';
     width: 15px;
@@ -404,16 +473,20 @@ header .flex-right .profile {
     transform: rotate(45deg) scale(0.5);
     transition: .15s;
 }
+
 .account.active {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
+    z-index: 5555;
 }
+
 .account.active:after {
     opacity: 1;
     visibility: visible;
     transform: rotate(45deg) scale(1);
 }
+
 .account li {
     padding: 12px 16px;
     list-style: none;
@@ -421,6 +494,7 @@ header .flex-right .profile {
     cursor: pointer;
     transition: .3s;
 }
+
 .account li:hover {
     background: #e1e1e1;
 }
@@ -442,6 +516,7 @@ nav {
     z-index: 40;
     box-sizing: content-box;
 }
+
 @media (max-width: 700px) {
     nav {
         top: 0;
@@ -449,72 +524,88 @@ nav {
         max-height: 100vh;
         z-index: 102;
     }
+
     .ios-web-app nav {
         top: 20px;
         height: calc(100vh - 20px);
         max-height: calc(100vh - 20px);
     }
 }
+
 nav.opened {
     transform: translateX(0);
 }
+
 @media (max-width: 700px) {
     nav.opened {
         overflow-y: auto;
     }
 }
+
 nav:hover {
     overflow-y: auto;
 }
+
 @media (min-width: 701px) {
     .ios-web-app nav {
         top: 84px;
         height: calc(100vh - 164px);
         max-height: calc(100vh - 164px);
     }
+
     nav::-webkit-scrollbar {
         width: 8px;
     }
+
     nav::-webkit-scrollbar-thumb {
         background: #bdbdbd;
     }
 }
+
 nav .info {
     color: #fff;
     padding: 12px;
     background: url(https://lh3.googleusercontent.com/proxy/kDU6IGDfkp__IzpeD45V214rQMKci3hmuw9P6rBRUlhhb_Luhwj6AlrieVpGHNl083wykRn-w0EdAojbAKywfL_pntEOy7jkh8sk65AKNnjP6f85zDOEFfFlVKCSFW9hSu_Cs6dA2JA=w426-h238-p) center/cover;
 }
+
 @media (min-width: 701px) {
     nav .info {
         display: none;
     }
 }
+
 nav img {
     display: block;
     width: 100%;
 }
+
 nav .profile {
     width: 48px;
     height: 48px;
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/343394/profile/profile-80_3.jpg) center/cover;
     margin-bottom: 18px;
 }
+
 nav p {
     font-size: 14px;
     font-weight: 500;
     margin: 0;
 }
+
 nav p:last-child {
     padding-top: 5px;
     font-weight: 300;
 }
+
 nav ul {
     padding: 8px 0;
     margin: 8px 12px;
 }
+
 nav ul:not(:last-child) {
     border-bottom: 1px solid #DDD;
 }
+
 nav li {
     align-items: center;
     list-style: none;
@@ -525,9 +616,11 @@ nav li {
     cursor: pointer;
     border-radius: 2px;
 }
+
 nav li:hover {
     background: rgba(0, 0, 0, 0.03);
 }
+
 nav li.active {
     color: #faa700;
     background: rgba(0, 0, 0, 0.05);
@@ -544,20 +637,24 @@ nav li.active {
     opacity: 0;
     visibility: hidden;
 }
+
 @media (max-width: 800px) {
     .menu-overlay {
         z-index: 39;
     }
+
     .opened + .menu-overlay {
         opacity: 1;
         visibility: visible;
     }
 }
+
 @media (max-width: 700px) {
     .menu-overlay {
         z-index: 101;
     }
 }
-.dell{
+
+.dell {
     background-color: #008CBA;
 }
