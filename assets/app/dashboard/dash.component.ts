@@ -193,7 +193,7 @@ export class DashComponent {
         var reference = this;
         io.socket.post('/addComments', {point: point, comments: comments,type: type}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
-            reference.showCommentsF(point);
+            reference.showCommentsF(point,reference.commentsName);
 
         });
     }
