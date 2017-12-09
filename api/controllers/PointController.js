@@ -108,7 +108,7 @@ module.exports = {
 
 
 
-    deletePoint: function (req, res) {
+    deletePoint: function (req, res) { //TODO(Point): сделать проверку
         Point.destroy({id: req.param('id')}).exec(function (err) {
             if (err) {
                 return res.negotiate(err);

@@ -21,9 +21,10 @@ export class DashComponent {
     add_point = false;
     addpont = false;
     open = [false];
-
+    commentsId;
+    commentsName;
     test_marker = [];
-
+    markerComments = [];
     constructor() {
         var reference = this;
 
@@ -188,7 +189,26 @@ export class DashComponent {
     add() {
         this.add_point = true;
     }
+    addComments(point, comments,type) {
+        var reference = this;
+        io.socket.post('/addComments', {point: point, comments: comments,type: type}, function (resData, jwRes) {
+            console.log(jwRes.statusCode); // => 200
+            reference.showCommentsF(point);
 
+        });
+    }
+    showCommentsF(id,name){
+        var reference = this;
+        reference.commentsId = id;
+        reference.commentsName = name;
+
+        io.socket.get('/getComments?ID='+id, function gotResponse(body, response) {
+            reference.markerComments = body;
+            console.log(reference.markerComments);
+
+
+        });
+    }
 }
 
 

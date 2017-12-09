@@ -26,7 +26,11 @@ module.exports.routes = {
     'GET /messages': 'ChatController.messages',
     'POST chat/sent': 'ChatController.addConv',
 
-    'GET /profile': 'DashController.checkUser'
+    'GET /profile': 'DashController.checkUser',
+
+    'POST /addComments' :'CommentsController.addComments',
+    'GET /getComments': 'CommentsController.getComments'
+
 
     //'GET /user':  function(req, res) { return res.send('hello!'); }
 

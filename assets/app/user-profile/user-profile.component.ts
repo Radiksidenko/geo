@@ -16,7 +16,19 @@ export class UserProfileComponent {
 
     constructor(){
         var reference = this;
+        io.socket.get("/ready", function (ready) {});
 
+        io.socket.on('connect', function () {
+            console.log('Connect');
+        });
+
+        io.socket.on('reconnect', function () {
+            console.log('Reconnect');
+        });
+
+        io.socket.on('disconnect', function () {
+            console.log('Disconnect');
+        });
         io.socket.get('/getuser_me', function gotResponse(body, response) {
             reference.name = body.name;
             reference.email = body.email;
@@ -25,6 +37,8 @@ export class UserProfileComponent {
             reference.gravatarUrl = body.gravatarUrl;
 
         });
+        setInterval(function () {
+        }, 10);
 
     }
 

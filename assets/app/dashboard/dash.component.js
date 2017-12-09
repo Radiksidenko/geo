@@ -31,6 +31,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     this.addpont = false;
                     this.open = [false];
                     this.test_marker = [];
+                    this.markerComments = [];
                     var reference = this;
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
                         reference.name = body.name;
@@ -162,6 +163,22 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                 }
                 add() {
                     this.add_point = true;
+                }
+                addComments(point, comments, type) {
+                    var reference = this;
+                    io.socket.post('/addComments', { point: point, comments: comments, type: type }, function (resData, jwRes) {
+                        console.log(jwRes.statusCode); // => 200
+                        reference.showCommentsF(point);
+                    });
+                }
+                showCommentsF(id, name) {
+                    var reference = this;
+                    reference.commentsId = id;
+                    reference.commentsName = name;
+                    io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
+                        reference.markerComments = body;
+                        console.log(reference.markerComments);
+                    });
                 }
             };
             DashComponent = __decorate([
