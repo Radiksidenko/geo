@@ -21,6 +21,16 @@ System.register(["@angular/core"], function (exports_1, context_1) {
             UserProfileComponent = class UserProfileComponent {
                 constructor() {
                     var reference = this;
+                    io.socket.get("/ready", function (ready) { });
+                    io.socket.on('connect', function () {
+                        console.log('Connect');
+                    });
+                    io.socket.on('reconnect', function () {
+                        console.log('Reconnect');
+                    });
+                    io.socket.on('disconnect', function () {
+                        console.log('Disconnect');
+                    });
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
                         reference.name = body.name;
                         reference.email = body.email;
@@ -28,6 +38,8 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         reference.lastLoggedIn = body.lastLoggedIn;
                         reference.gravatarUrl = body.gravatarUrl;
                     });
+                    setInterval(function () {
+                    }, 10);
                 }
             };
             UserProfileComponent = __decorate([
