@@ -168,7 +168,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     var reference = this;
                     io.socket.post('/addComments', { point: point, comments: comments, type: type }, function (resData, jwRes) {
                         console.log(jwRes.statusCode); // => 200
-                        reference.showCommentsF(point);
+                        reference.showCommentsF(point, reference.commentsName);
                     });
                 }
                 showCommentsF(id, name) {
