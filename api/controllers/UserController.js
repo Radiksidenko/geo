@@ -93,7 +93,7 @@ module.exports = {
                         req.session.me = user.id;
 
 
-                        return res.json([user.id, user.name, user.email]);
+                        return res.json({"id":user.id, "name" : user.name, "email" :user.email});
                         //return res.redirect('/dashboard' );
                     }
                 })
