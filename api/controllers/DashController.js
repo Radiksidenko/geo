@@ -15,7 +15,7 @@ module.exports = {
             return res.view('login');
         } else {
             console.log('You are logged in');
-            return res.redirect('/dashboard' );
+            return res.redirect('/dashboard');
         }
     },
 
@@ -28,7 +28,7 @@ module.exports = {
 
             var firstQuery = {
                 where: {id: req.session.me},
-                select: ['name', 'email', 'lastLoggedIn', 'gravatarUrl','id']
+                select: ['name', 'email', 'lastLoggedIn', 'gravatarUrl', 'id', 'surname', 'gender', 'date_of_birth', 'country', 'city', 'phone', 'web_site', 'interests', 'about_myself', 'role']
             };
             User.findOne(firstQuery, function (err, user) {
                 if (err) {
@@ -49,7 +49,7 @@ module.exports = {
         } else {
             var firstQuery = {
                 where: {id: req.param('ID')},
-                select: ['name', 'email', 'lastLoggedIn', 'gravatarUrl']
+                select: ['name', 'email', 'lastLoggedIn', 'gravatarUrl', 'surname', 'gender', 'date_of_birth', 'country', 'city', 'phone', 'web_site', 'interests', 'about_myself', 'role']
             };
             User.findOne(firstQuery, function (err, user) {
                 if (err) {

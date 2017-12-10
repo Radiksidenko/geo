@@ -35,11 +35,17 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         reference.name = body.name;
                         reference.email = body.email;
                         reference.id = body.id;
+                        reference.phone = body.phone;
                         reference.lastLoggedIn = body.lastLoggedIn;
                         reference.gravatarUrl = body.gravatarUrl;
                     });
                     setInterval(function () {
                     }, 10);
+                }
+                update(type, value) {
+                    io.socket.post('/update', { [type]: value }, function (resData, jwRes) {
+                        console.log(jwRes.statusCode); // => 200
+                    });
                 }
             };
             UserProfileComponent = __decorate([
