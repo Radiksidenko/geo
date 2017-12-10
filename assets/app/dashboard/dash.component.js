@@ -32,6 +32,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     this.open = [false];
                     this.test_marker = [];
                     this.markerComments = [];
+                    this.status = 'all';
                     var reference = this;
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
                         reference.name = body.name;
@@ -39,8 +40,12 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         reference.id = body.id;
                     });
                     io.socket.get('/get_point', function gotResponse(body, response) {
-                        reference.test_marker = body;
-                        console.log(reference.test_marker);
+                    });
+                    io.socket.on('allPoint', function (body) {
+                        if (reference.status == 'all') {
+                            reference.test_marker = body;
+                            console.log(reference.status);
+                        }
                     });
                     setInterval(function () {
                     }, 10);
@@ -107,19 +112,23 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     var reference = this;
                     io.socket.get('/get_my_point', function gotResponse(body, response) {
                         reference.test_marker = body;
-                        console.log(reference.test_marker);
+                        reference.status = 'myPrivat';
+                        console.log(reference.status);
                     });
                 }
                 showPublic() {
                     var reference = this;
                     io.socket.get('/get_point', function gotResponse(body, response) {
-                        reference.test_marker = body;
+                        reference.status = 'all';
+                        console.log(reference.status);
                     });
                 }
                 showMyPublic() {
                     var reference = this;
                     io.socket.get('/get_My_Public_point', function gotResponse(body, response) {
                         reference.test_marker = body;
+                        reference.status = 'myPoint';
+                        console.log(reference.status);
                     });
                 }
                 dell(id) {

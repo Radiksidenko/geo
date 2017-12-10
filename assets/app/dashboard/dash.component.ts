@@ -16,8 +16,8 @@ export class DashComponent {
     id;
     My_Y = 0;
     My_X = 0;
-    now_X=46.488012;
-    now_Y=30.73079860000007;
+    now_X = 46.488012;
+    now_Y = 30.73079860000007;
     add_point = false;
     addpont = false;
     open = [false];
@@ -25,6 +25,8 @@ export class DashComponent {
     commentsName;
     test_marker = [];
     markerComments = [];
+    status = 'all';
+
     constructor() {
         var reference = this;
 
@@ -36,10 +38,13 @@ export class DashComponent {
         });
 
         io.socket.get('/get_point', function gotResponse(body, response) {
-            reference.test_marker = body;
-            console.log(reference.test_marker);
         });
-
+        io.socket.on('allPoint', function (body) {
+            if (reference.status == 'all') {
+                reference.test_marker = body;
+                console.log(reference.status);
+            }
+        });
         setInterval(function () {
         }, 10);
     }
@@ -92,12 +97,14 @@ export class DashComponent {
 
             console.log("watching: " + lat + " " + lon);
         }
-        function setgeo(position){
+
+        function setgeo(position) {
             reference.now_Y = position.coords.longitude;
             reference.now_X = position.coords.latitude;
             reference.lat = reference.now_X;
             reference.lng = reference.now_Y;
         }
+
         function geoLocationWatchPositionError(error) {
             console.warn('Geo Watch error:' + error.code + ' ' + error.message);
         }
@@ -122,15 +129,20 @@ export class DashComponent {
 
         io.socket.get('/get_my_point', function gotResponse(body, response) {
             reference.test_marker = body;
-            console.log(reference.test_marker);
+            reference.status = 'myPrivat';
+            console.log(reference.status);
+
         });
     }
 
     showPublic() {
         var reference = this;
         io.socket.get('/get_point', function gotResponse(body, response) {
-            reference.test_marker = body;
+            reference.status = 'all';
+            console.log(reference.status);
+
         });
+
 
     }
 
@@ -138,6 +150,9 @@ export class DashComponent {
         var reference = this;
         io.socket.get('/get_My_Public_point', function gotResponse(body, response) {
             reference.test_marker = body;
+            reference.status = 'myPoint';
+            console.log(reference.status);
+
         });
     }
 
@@ -188,20 +203,22 @@ export class DashComponent {
     add() {
         this.add_point = true;
     }
-    addComments(point, comments,type) {
+
+    addComments(point, comments, type) {
         var reference = this;
-        io.socket.post('/addComments', {point: point, comments: comments,type: type}, function (resData, jwRes) {
+        io.socket.post('/addComments', {point: point, comments: comments, type: type}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200
-            reference.showCommentsF(point,reference.commentsName);
+            reference.showCommentsF(point, reference.commentsName);
 
         });
     }
-    showCommentsF(id,name){
+
+    showCommentsF(id, name) {
         var reference = this;
         reference.commentsId = id;
         reference.commentsName = name;
 
-        io.socket.get('/getComments?ID='+id, function gotResponse(body, response) {
+        io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
             reference.markerComments = body;
             console.log(reference.markerComments);
 
