@@ -25,7 +25,7 @@ module.exports = {
             }
 
             console.log('point Added');
-
+            //sails.sockets.broadcast('funSockets', 'hello', point);
             return res.json([]);
         })
     },
@@ -60,8 +60,11 @@ module.exports = {
             if (err) {
                 res.negotiate(err);
             }
+            sails.sockets.join(req, 'PointRoom');
+            sails.sockets.broadcast('PointRoom', 'allPoint', point);
             return res.json(point);
         })
+
 
     },
     getMyPrivatePoint: function (req, res) {
