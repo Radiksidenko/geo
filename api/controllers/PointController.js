@@ -10,23 +10,19 @@ module.exports = {
 
     point: function (req, res) {
         console.log('point');
-
         Point.create({
-
             x: req.param('x'),
             y: req.param('y'),
             lable: req.param('lable'),
             name: req.param('name'),
             type: 'public',
             owner: req.session.me
-
-        }, function pointCreated(err) {
+        },
+            function pointCreated(err, point) {
             if (err) {
                 console.log('Error: ' + err);
                 return res.negotiate(err);
             }
-
-            //SESSION VAR
 
             console.log('point Added');
 
@@ -58,13 +54,12 @@ module.exports = {
     getPoint: function (req, res) {
         var firstQuery = {
             where: {type: 'public'},
-            select: ['x', 'y', 'lable', 'name', 'id','owner']
+            select: ['x', 'y', 'lable', 'name', 'id', 'owner']
         };
         Point.find(firstQuery, function (err, point) {
             if (err) {
                 res.negotiate(err);
             }
-
             return res.json(point);
         })
 
@@ -93,19 +88,17 @@ module.exports = {
     },
     getMyPublicPoint: function (req, res) {
         var firstQuery = {
-            where: {type: 'public',owner: req.session.me},
-            select: ['x', 'y', 'lable', 'name', 'id','owner']
+            where: {type: 'public', owner: req.session.me},
+            select: ['x', 'y', 'lable', 'name', 'id', 'owner']
         };
         Point.find(firstQuery, function (err, point) {
             if (err) {
                 console.log(err);
             }
-
             return res.json(point);
         })
 
     },
-
 
 
     deletePoint: function (req, res) { //TODO(Point): сделать проверку

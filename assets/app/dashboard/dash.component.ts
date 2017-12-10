@@ -38,9 +38,8 @@ export class DashComponent {
         io.socket.get('/get_point', function gotResponse(body, response) {
             reference.test_marker = body;
             console.log(reference.test_marker);
-
-
         });
+
         setInterval(function () {
         }, 10);
     }

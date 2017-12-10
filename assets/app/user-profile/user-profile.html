@@ -7,3 +7,7 @@
     <img width="150px"
          src="{{gravatarUrl}}">
 </div>
+
+<input (keyup)="update('name',Name.value)" type="search" #Name [(ngModel)]="name">
+<input (keyup.enter)="update('email',Email.value)" type="search" #Email [(ngModel)]="email">
+<input (keyup.enter)="update('phone',Phone.value)" type="search" #Phone [(ngModel)]="phone">

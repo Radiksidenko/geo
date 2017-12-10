@@ -11,6 +11,7 @@ export class UserProfileComponent {
     name;
     email;
     id;
+    phone;
     lastLoggedIn;
     gravatarUrl;
 
@@ -33,6 +34,8 @@ export class UserProfileComponent {
             reference.name = body.name;
             reference.email = body.email;
             reference.id = body.id;
+            reference.phone= body.phone;
+
             reference.lastLoggedIn = body.lastLoggedIn;
             reference.gravatarUrl = body.gravatarUrl;
 
@@ -41,5 +44,11 @@ export class UserProfileComponent {
         }, 10);
 
     }
+    update(type: string, value) {
+        io.socket.post('/update', {[type]: value}, function (resData, jwRes) {
+            console.log(jwRes.statusCode); // => 200
+        });
+    }
+
 
 }
