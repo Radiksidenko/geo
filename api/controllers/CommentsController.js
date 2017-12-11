@@ -58,6 +58,8 @@ module.exports = {
                     }
 
                 }
+                sails.sockets.join(req, 'CemmentRoom');
+                sails.sockets.broadcast('CemmentRoom', 'Comments', comments);
                 return res.json(comments);
             })
         })

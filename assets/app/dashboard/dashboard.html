@@ -23,10 +23,12 @@
             <input type="text" placeholder="Text" #name>
             <span class="focus-border">description</span>
             <textarea type="text" placeholder="Text" #description></textarea>
-
-            <button class="butu" (click)="addPublic(My_X,My_Y,name.value);add_point=!add_point;addpont=!addpont ">all
+            <button class="butu"
+                    (click)="addPublic(My_X,My_Y,name.value,description.value);add_point=!add_point;addpont=!addpont;name.value='';description.value=''">
+                all
             </button>
-            <button class="butu" (click)="addPrivate(My_X,My_Y,name.value);add_point=!add_point;addpont=!addpont ">
+            <button class="butu"
+                    (click)="addPrivate(My_X,My_Y,name.value);add_point=!add_point;addpont=!addpont;name.value=''">
                 Private
             </button>
             <button class="butu" (click)="add_point=!add_point;addpont=!addpont ">cancel</button>
@@ -39,8 +41,15 @@
     <div>
         <h1>{{commentsName}}</h1>
         <ul *ngFor="let m of markerComments; let i = index">
-            <li>{{m.name}}</li>
-            <li>{{m.comments}}</li>
+            <div class="description" *ngIf="m.type == 'description'; else elseBlock" >
+                <li>{{m.name}}</li>
+                <li>{{m.comments}}</li>
+            </div>
+            <ng-template #elseBlock>
+                <li>{{m.name}}</li>
+                <li>{{m.comments}}</li>
+            </ng-template>
+
         </ul>
     </div>
     <textarea type="text" placeholder="Text" #comments></textarea>

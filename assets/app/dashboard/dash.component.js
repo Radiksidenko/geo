@@ -55,10 +55,13 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         console.log(jwRes.statusCode); // => 200
                     });
                 }
-                addPublic(x, y, name) {
+                addPublic(x, y, name, description) {
                     var reference = this;
                     io.socket.post('/point', { x: x, y: y, lable: 'Pu', name: name }, function (resData, jwRes) {
-                        console.log(jwRes.statusCode); // => 200
+                        console.log(resData); // => 200
+                        io.socket.post('/addComments', { point: resData.id, comments: description, type: 'description' }, function (resData, jwRes) {
+                            console.log(jwRes.statusCode); // => 200
+                        });
                         reference.showPublic();
                     });
                 }
@@ -185,8 +188,12 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     reference.commentsId = id;
                     reference.commentsName = name;
                     io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
-                        reference.markerComments = body;
-                        console.log(reference.markerComments);
+                    });
+                    io.socket.on('Comments', function (body) {
+                        if (reference.status == 'all') {
+                            reference.markerComments = body;
+                            console.log(reference.status);
+                        }
                     });
                 }
             };

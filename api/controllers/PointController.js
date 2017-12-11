@@ -26,7 +26,7 @@ module.exports = {
 
             console.log('point Added');
             //sails.sockets.broadcast('funSockets', 'hello', point);
-            return res.json([]);
+            return res.json(point);
         })
     },
     privatePoint: function (req, res) {

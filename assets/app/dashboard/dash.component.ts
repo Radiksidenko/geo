@@ -55,10 +55,13 @@ export class DashComponent {
         });
     }
 
-    addPublic(x, y, name: string) {
+    addPublic(x, y, name: string,description) {
         var reference = this;
         io.socket.post('/point', {x: x, y: y, lable: 'Pu', name: name}, function (resData, jwRes) {
-            console.log(jwRes.statusCode); // => 200
+            console.log(resData); // => 200
+            io.socket.post('/addComments', {point: resData.id, comments: description, type: 'description'}, function (resData, jwRes) {
+                console.log(jwRes.statusCode); // => 200
+            });
             reference.showPublic();
         });
     }
@@ -112,7 +115,6 @@ export class DashComponent {
 
     mapClicked($event: MouseEvent) {
         if (this.add_point == true) {
-
             this.My_Y = $event.coords.lng;
             this.My_X = $event.coords.lat;
             this.addpont = true;
@@ -219,10 +221,12 @@ export class DashComponent {
         reference.commentsName = name;
 
         io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
-            reference.markerComments = body;
-            console.log(reference.markerComments);
-
-
+        });
+        io.socket.on('Comments', function (body) {
+            if (reference.status == 'all') {
+                reference.markerComments = body;
+                console.log(reference.status);
+            }
         });
     }
 }
