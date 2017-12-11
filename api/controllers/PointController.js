@@ -40,14 +40,14 @@ module.exports = {
             name: req.param('name'),
             type: 'private',
             owner: req.session.me
-        }, function pointCreated(err) {
+        }, function pointCreated(err,point) {
             if (err) {
                 console.log('Error: ' + err);
                 return res.negotiate(err);
             }
             console.log('private point Added');
 
-            return res.json([]);
+            return res.json(point);
         })
     },
 

@@ -31,8 +31,8 @@ module.exports = {
     getComments: function (req, res) { //TODO(Comments): подумать над этим
         console.log('comments getComments');
 
-
-        Comments.find({point: req.param('ID')}, function (err, comments) {
+        var pointId = req.param('ID');
+        Comments.find({point: pointId}, function (err, comments) {
             if (err) {
                 res.negotiate(err);
             }
@@ -58,8 +58,8 @@ module.exports = {
                     }
 
                 }
-                sails.sockets.join(req, 'CemmentRoom');
-                sails.sockets.broadcast('CemmentRoom', 'Comments', comments);
+                sails.sockets.join(req, 'CemmentRoom'+pointId);
+                sails.sockets.broadcast('CemmentRoom'+pointId, 'Comments', comments);
                 return res.json(comments);
             })
         })

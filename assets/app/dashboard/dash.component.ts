@@ -55,11 +55,15 @@ export class DashComponent {
         });
     }
 
-    addPublic(x, y, name: string,description) {
+    addPublic(x, y, name: string, description) {
         var reference = this;
         io.socket.post('/point', {x: x, y: y, lable: 'Pu', name: name}, function (resData, jwRes) {
             console.log(resData); // => 200
-            io.socket.post('/addComments', {point: resData.id, comments: description, type: 'description'}, function (resData, jwRes) {
+            io.socket.post('/addComments', {
+                point: resData.id,
+                comments: description,
+                type: 'description'
+            }, function (resData, jwRes) {
                 console.log(jwRes.statusCode); // => 200
             });
             reference.showPublic();
@@ -67,10 +71,16 @@ export class DashComponent {
     }
 
 
-    addPrivate(x, y, name: string) {
+    addPrivate(x, y, name: string, description) {
         var reference = this;
         io.socket.post('/private_point', {x: x, y: y, lable: 'Pr', name: name}, function (resData, jwRes) {
-            console.log(jwRes.statusCode); // => 200
+            io.socket.post('/addComments', {
+                point: resData.id,
+                comments: description,
+                type: 'description'
+            }, function (resData, jwRes) {
+                console.log(jwRes.statusCode); // => 200
+            });
             reference.showMyPrivat();
         });
 
@@ -223,10 +233,8 @@ export class DashComponent {
         io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
         });
         io.socket.on('Comments', function (body) {
-            if (reference.status == 'all') {
-                reference.markerComments = body;
-                console.log(reference.status);
-            }
+            reference.markerComments = body;
+
         });
     }
 }

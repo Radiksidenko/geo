@@ -59,16 +59,26 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     var reference = this;
                     io.socket.post('/point', { x: x, y: y, lable: 'Pu', name: name }, function (resData, jwRes) {
                         console.log(resData); // => 200
-                        io.socket.post('/addComments', { point: resData.id, comments: description, type: 'description' }, function (resData, jwRes) {
+                        io.socket.post('/addComments', {
+                            point: resData.id,
+                            comments: description,
+                            type: 'description'
+                        }, function (resData, jwRes) {
                             console.log(jwRes.statusCode); // => 200
                         });
                         reference.showPublic();
                     });
                 }
-                addPrivate(x, y, name) {
+                addPrivate(x, y, name, description) {
                     var reference = this;
                     io.socket.post('/private_point', { x: x, y: y, lable: 'Pr', name: name }, function (resData, jwRes) {
-                        console.log(jwRes.statusCode); // => 200
+                        io.socket.post('/addComments', {
+                            point: resData.id,
+                            comments: description,
+                            type: 'description'
+                        }, function (resData, jwRes) {
+                            console.log(jwRes.statusCode); // => 200
+                        });
                         reference.showMyPrivat();
                     });
                 }
@@ -190,10 +200,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
                     });
                     io.socket.on('Comments', function (body) {
-                        if (reference.status == 'all') {
-                            reference.markerComments = body;
-                            console.log(reference.status);
-                        }
+                        reference.markerComments = body;
                     });
                 }
             };
