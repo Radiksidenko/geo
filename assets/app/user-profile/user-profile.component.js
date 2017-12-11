@@ -20,7 +20,25 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         execute: function () {
             UserProfileComponent = class UserProfileComponent {
                 constructor() {
+                    this.editing = false;
                     var reference = this;
+                    io.socket.get('/getuser_me', function gotResponse(body, response) {
+                        reference.name = body.name;
+                        reference.surname = body.surname;
+                        reference.gender = body.gender;
+                        reference.date_of_birth = body.date_of_birth;
+                        reference.country = body.country;
+                        reference.city = body.city;
+                        reference.phone = body.phone;
+                        reference.web_site = body.web_site;
+                        reference.interests = body.interests;
+                        reference.about_myself = body.about_myself;
+                        reference.role = body.role;
+                        reference.email = body.email;
+                        reference.password = body.password;
+                        reference.lastLoggedIn = body.lastLoggedIn;
+                        reference.gravatarUrl = body.gravatarUrl;
+                    });
                     io.socket.get("/ready", function (ready) { });
                     io.socket.on('connect', function () {
                         console.log('Connect');
@@ -30,14 +48,6 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     });
                     io.socket.on('disconnect', function () {
                         console.log('Disconnect');
-                    });
-                    io.socket.get('/getuser_me', function gotResponse(body, response) {
-                        reference.name = body.name;
-                        reference.email = body.email;
-                        reference.id = body.id;
-                        reference.phone = body.phone;
-                        reference.lastLoggedIn = body.lastLoggedIn;
-                        reference.gravatarUrl = body.gravatarUrl;
                     });
                     setInterval(function () {
                     }, 10);
