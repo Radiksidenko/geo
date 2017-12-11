@@ -1,13 +1,141 @@
-<div>{{name}}
-    {{email}}
-    {{id}}
-    Петраааааркаааа
-    {{lastLoggedIn}}
-    {{gravatarUrl}}
-    <img width="150px"
-         src="{{gravatarUrl}}">
-</div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-<input (keyup)="update('name',Name.value)" type="search" #Name [(ngModel)]="name">
-<input (keyup.enter)="update('email',Email.value)" type="search" #Email [(ngModel)]="email">
-<input (keyup.enter)="update('phone',Phone.value)" type="search" #Phone [(ngModel)]="phone">
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+
+<header class="header">
+    <div class="container">
+        <div class="name">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h2><strong>{{name}} {{surname}}</strong></h2>
+                </div>
+                <div class="col-sm-3">
+                    <div class="button-email pull-right">
+                        <a class="btn btn-outline-success btn-sm" (click)="editing=!editing">Edit Profile <i
+                                class="fa fa-pencil"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;">
+            <div class="col-sm-3">
+                <a href="#"> <img class="rounded-circle" src={{gravatarUrl}}></a>
+            </div>
+
+            <div class="col-sm-6">
+                <h5>{{country}}</h5>
+                <h4>{{city}}</h4>
+            </div>
+
+            <div class="col-sm-3 text-center social">
+                <h5><span class="number" class="fa fa-phone">Phone: <strong>{{phone}}</strong></span></h5>
+                <div class="button-email">
+                    <a href={{email}} class="btn btn-outline-success btn-block"><i class="fa fa-envelope-o"></i>Send
+                        Email</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#">
+            <span class="fa-stack">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+            </span></a>
+                    <a href="#">
+            <span class="fa-stack">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+            </span></a>
+                    <a href="#">
+            <span class="fa-stack">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span></a>
+                    <a href="#">
+            <span class="fa-stack">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-slideshare fa-stack-1x fa-inverse"></i>
+            </span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-block text-xs-left">
+                <h5><i class="fa fa-vcard-o fa-fw"></i>General</h5>
+                <ul class="list-group" style="margin-top:15px;margin-bottom:15px;">
+                    <li class="list-group-item"><span class="gen-info">Name: </span>{{name}}
+                        <input *ngIf="editing" (keyup)="update('name',Name.value)" type="search" #Name
+                               [(ngModel)]="name">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Surname: </span>{{surname}}
+                        <input *ngIf="editing" (keyup)="update('surname',Surname.value)" type="search" #Surname
+                               [(ngModel)]="surname">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Gender: </span>{{gender}}
+                        <input *ngIf="editing" (keyup)="update('gender',Gender.value)" type="search" #Gender
+                               [(ngModel)]="gender">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Date of birth: </span>{{date_of_birth}}
+                        <input *ngIf="editing" (keyup)="update('date_of_birth',Date_of_birth.value)" type="search"
+                               #Date_of_birth [(ngModel)]="date_of_birth">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Country: </span>{{country}}
+                        <input *ngIf="editing" (keyup)="update('country',Country.value)" type="search" #Country
+                               [(ngModel)]="country">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">City: </span>{{city}}
+                        <input *ngIf="editing" (keyup)="update('city',City.value)" type="search" #City
+                               [(ngModel)]="city">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Phone: </span>{{phone}}
+                        <input *ngIf="editing" (keyup)="update('phone',Phone.value)" type="search" #Phone
+                               [(ngModel)]="phone">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Website: </span>{{web_site}}
+                        <input *ngIf="editing" (keyup)="update('web_site',Web_site.value)" type="search" #Web_site
+                               [(ngModel)]="web_site">
+                    </li>
+                    <li class="list-group-item"><span class="gen-info">Email: </span>{{email}}
+                        <input *ngIf="editing" (keyup)="update('email',Email.value)" type="search" #Email
+                               [(ngModel)]="email">
+                    </li>
+                    <a *ngIf="editing" class="btn btn-outline-success btn-sm" (click)="editing=!editing">End edditing<i
+                            class="fa fa-check-circle"></i></a>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-block">
+                    <h5><i class="fa fa-rocket fa-fw"></i>Interests</h5>
+                    <input *ngIf="editing" (keyup)="update('interests',Interests.value)" type="search" #Interests
+                           [(ngModel)]="interests">
+                    <p>{{interests}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-block text-xs-left">
+                    <h5><i class="fa fa-user fa-fw"></i>About me</h5>
+                    <p *ngIf="editing">
+                        <input *ngIf="editing" (keyup)="update('about_myself',About_myself.value)" type="search"
+                               #About_myself
+                               [(ngModel)]="about_myself">
+                    </p>
+                    <p>{{about_myself}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 250px"></div>
+</div>
