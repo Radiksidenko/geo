@@ -13,6 +13,8 @@ module.exports.routes = {
 
     'POST /signup': 'UserController.signup',
     'POST /update': 'UserController.update',
+    'POST /upload_photo_user': 'UserController.upload_photo_user',
+
     'POST /login': 'UserController.login',
 
     'POST /private_point': 'PointController.privatePoint',
@@ -29,9 +31,9 @@ module.exports.routes = {
     'GET /profile': 'DashController.checkUser',
 
     'POST /addComments' :'CommentsController.addComments',
-    'GET /getComments': 'CommentsController.getComments'
+    'GET /getComments': 'CommentsController.getComments',
 
-
+    'POST /upload':'CommentsController.upload'
     //'GET /user':  function(req, res) { return res.send('hello!'); }
 
 };

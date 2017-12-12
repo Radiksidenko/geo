@@ -1,3 +1,7 @@
+
+.col-sm-3 img{
+    cursor: pointer;
+}
 body{
     /*background: #DAE3E7;*/
     background: green;

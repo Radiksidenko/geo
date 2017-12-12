@@ -93,7 +93,7 @@ module.exports = {
                         req.session.me = user.id;
 
 
-                        return res.json([user.id, user.name, user.email]);
+                        return res.json({"id": user.id, "name": user.name, "email": user.email});
                         //return res.redirect('/dashboard' );
                     }
                 })
@@ -125,6 +125,34 @@ module.exports = {
             }
             console.log('Updated user to have name ' + updated[0].id);
         });
-    }
-};
+    },
+    upload_photo_user: function (req, res) {
+        if (!req.session.me) {
+            console.log("error  -> UserController.js -> upload_photo");
+        } else {
+            req.file('avatar').upload({
+                    dirname: require('path').resolve(sails.config.appPath, 'assets/images/photo')
+                },
+                function (err, files) {
+                    if (err)
+                        return res.serverError(err);
+                    const path = require('path');
+                    var gravatarUrl = 'images/photo/' + files[0].fd.split(path.sep).pop();
 
+
+                    User.update({id: req.session.me}, {gravatarUrl: gravatarUrl}).exec(function afterwards(err, updated) {
+
+                        if (err) {
+                            // handle error here- e.g. `res.serverError(err);`
+                            return;
+                        }
+                        console.log('Updated user to have name ' + updated[0].id);
+                    });
+                    return "ok";
+                }
+            );
+
+        }
+    }
+
+}

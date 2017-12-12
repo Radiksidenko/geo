@@ -5,7 +5,14 @@
           href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link rel='stylesheet prefetch'
           href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <app-dialog [(visible)]="showDialog">
 
+        <form ngNoForm action="/upload_photo_user" enctype="multipart/form-data" method="post" >
+            <input type="file" name="avatar"><br>
+            <input type="submit" value="Upload">
+        </form>
+
+    </app-dialog>
 
 <header class="header">
     <div class="container">
@@ -24,8 +31,8 @@
         </div>
 
         <div class="row" style="margin-top:20px;">
-            <div class="col-sm-3">
-                <a href="#"> <img class="rounded-circle" src={{gravatarUrl}}></a>
+            <div class="col-sm-3" (click)="showDialog=!showDialog">
+                 <img class="rounded-circle" src={{gravatarUrl}}>
             </div>
 
             <div class="col-sm-6">
@@ -66,6 +73,9 @@
         </div>
     </div>
 </header>
+
+
+
 <div class="container">
 
     <div class="row">
