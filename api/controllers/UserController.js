@@ -127,6 +127,7 @@ module.exports = {
         });
     },
     upload_photo_user: function (req, res) {
+        const path = require('path');
         if (!req.session.me) {
             console.log("error  -> UserController.js -> upload_photo");
         } else {
@@ -136,7 +137,7 @@ module.exports = {
                 function (err, files) {
                     if (err)
                         return res.serverError(err);
-                    const path = require('path');
+
                     var gravatarUrl = 'images/photo/' + files[0].fd.split(path.sep).pop();
 
 
