@@ -140,7 +140,9 @@ module.exports = {
                         return res.serverError(err);
 
                     var gravatarUrl = 'images/photo/' + files[0].fd.split(path.sep).pop();
-
+                    console.log('*****************')
+                    console.log(files)
+                    console.log('*****************')
 
                     User.update({id: req.session.me}, {gravatarUrl: gravatarUrl}).exec(function afterwards(err, updated) {
 
