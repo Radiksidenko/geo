@@ -131,7 +131,7 @@ module.exports = {
             console.log("error  -> UserController.js -> upload_photo");
         } else {
             req.file('avatar').upload({
-                    dirname: require('path').resolve(sails.config.appPath, 'assets/images/photo')
+                    dirname: require('path').resolve(sails.config.appPath, 'assets' + path.sep + 'images' + path.sep + 'photo')
                 },
                 function (err, files) {
                     if (err)
