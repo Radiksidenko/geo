@@ -38,6 +38,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         reference.name = body.name;
                         reference.email = body.email;
                         reference.id = body.id;
+                        reference.gravatarUrl = body.gravatarUrl;
                     });
                     io.socket.get('/get_point', function gotResponse(body, response) {
                     });
@@ -197,7 +198,10 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     var reference = this;
                     reference.commentsId = id;
                     reference.commentsName = name;
+                    reference.userGravatar = gravatar;
                     io.socket.get('/getComments?ID=' + id, function gotResponse(body, response) {
+                    });
+                    io.socket.get('/getuser?ID=' + id, function gotResponse(body, response) {
                     });
                     io.socket.on('Comments', function (body) {
                         reference.markerComments = body;

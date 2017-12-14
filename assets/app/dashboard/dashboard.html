@@ -6,9 +6,9 @@
 
 <app-dialog [(visible)]="showDialog">
 
-    <div class="wrapper">
+    <div class="addModal">
         <p>Please click on the map to add a point.</p>
-        <button class="but" (click)="add(); showDialog=!showDialog">OK</button>
+        <button class="butu" (click)="add(); showDialog=!showDialog">OK</button>
     </div>
 
 </app-dialog>
@@ -25,7 +25,7 @@
             <textarea type="text" placeholder="Text" #description></textarea>
             <button class="butu"
                     (click)="addPublic(My_X,My_Y,name.value,description.value);add_point=!add_point;addpont=!addpont;name.value='';description.value=''">
-                all
+                Public
             </button>
             <button class="butu"
                     (click)="addPrivate(My_X,My_Y,name.value,description.value);add_point=!add_point;addpont=!addpont;name.value='';description.value=''">
@@ -39,22 +39,22 @@
 
 <app-dialog [(visible)]="showComments">
     <div>
-        <h1>{{commentsName}}</h1>
-        <ul *ngFor="let m of markerComments; let i = index">
-            <div class="description" *ngIf="m.type == 'description'; else elseBlock" >
-                <li>{{m.name}}</li>
-                <li>{{m.comments}}</li>
+        <span class="place"><h1><strong>{{commentsName}}</strong></h1></span>
+        <ul class="list-group" *ngFor="let m of markerComments; let i = index">
+            <div class="description" *ngIf="m.type == 'description'; else elseBlock">
+                <li class="description-auth"><img class="description-avat" src={{gravatarUrl}}>{{m.name}}</li>
+                <li class="description-text" *ngIf="m.comments">{{m.comments}}</li>
             </div>
-            <ng-template #elseBlock>
-                <li>{{m.name}}</li>
-                <li>{{m.comments}}</li>
+            <ng-template class="comment" #elseBlock>
+                <li class="comment-auth"><img class="description-avat" src={{gravatarUrl}}>{{m.name}}</li>
+                <li class="comment-text">{{m.comments}}</li>
             </ng-template>
 
         </ul>
     </div>
     <textarea type="text" placeholder="Text" #comments></textarea>
 
-    <button class="butu" (click)="addComments(commentsId,comments.value,'point');comments.value=''">all</button>
+    <button class="butu" (click)="addComments(commentsId,comments.value,'point');comments.value=''">Add</button>
 </app-dialog>
 <header class="flex hero">
     <div class="flex-left">
@@ -106,9 +106,12 @@
             [iconUrl]="m.owner == id ? m.lable=='Pr'?'/images/private.png':'/images/my_public.png':'/images/public.png'">
 
         <sebm-google-map-info-window [isOpen]="open[i]">
-            <strong>{{m.name}}</strong>
-            <button class="dell" *ngIf="m.owner == id" (click)="dell(m.id)">dell</button>
-            <button class="dell" (click)="showCommentsF(m.id,m.name);showComments=!showComments">Add comments</button>
+            <h4><strong>{{m.name}}</strong></h4>
+            <div>
+                <button class="butu" (click)="showCommentsF(m.id,m.name);showComments=!showComments">Add comments
+                </button>
+                <button class="butu" *ngIf="m.owner == id" (click)="dell(m.id)">dell</button>
+            </div>
 
         </sebm-google-map-info-window>
 
