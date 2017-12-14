@@ -40,6 +40,7 @@ module.exports.routes = {
 
     'POST /addComments' :'CommentsController.addComments',
     'GET /getComments': 'CommentsController.getComments',
+    'POST /upload_photoComments': 'CommentsController.upload_photoComments',
 
     'POST /upload':'CommentsController.upload'
     //'GET /user':  function(req, res) { return res.send('hello!'); }

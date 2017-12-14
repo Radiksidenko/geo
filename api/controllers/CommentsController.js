@@ -65,7 +65,47 @@ module.exports = {
                 })
             })
         }else {console.log('error getComments')}
+    },
+    upload_photoComments: function (req, res) {
+        const path = require('path');
+        if (!req.session.me) {
+            console.log("error  -> UserController.js -> upload_photo");
+        } else {
+            req.file('photo').upload({
+                    dirname: sails.config.appPath + path.sep + 'assets' + path.sep + 'images' + path.sep + 'photo'
+
+                },
+                function (err, files) {
+                    if (err)
+                        return res.serverError(err);
+
+                    var gravatarUrl = 'images/photo/' + files[0].fd.split(path.sep).pop();
+                    console.log('*****************')
+                    console.log(files)
+                    console.log('*****************')
+
+                    Comments.create({
+                        owner: req.session.me,
+                        point: req.param('ID'),
+                        comments: gravatarUrl,
+                        type: 'photo'
+                    }, function pointCreated(err) {
+                        console.log(req.param('point'));
+                        if (err) {
+                            console.log('Error: ' + err);
+                            return res.negotiate(err);
+                        }
+                        console.log('comments Added');
+
+                        return res.json([]);
+                    });
+                    return "ok";
+                }
+            );
+
+        }
     }
+
 };
 
 
