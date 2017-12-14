@@ -112,9 +112,9 @@
             [iconUrl]="m.owner == id ? m.lable=='Pr'?'/images/private.png':'/images/my_public.png':'/images/public.png'">
 
         <sebm-google-map-info-window [isOpen]="open[i]">
-            <h4><strong>{{m.name}}</strong></h4>
+            <h4><strong>{{m.name}}</strong>({{m.ownerName}})</h4>
             <button class="butu" *ngIf="m.owner == id" (click)="dell(m.id)">dell</button>
-            <button class="butu" (click)="showCommentsF(m.id,m.name);showComments=!showComments">Add comments</button>
+            <button class="butu" (click)="showCommentsF(m.id,m.name+' ('+m.ownerName+')');showComments=!showComments">Add comments</button>
 
         </sebm-google-map-info-window>
 
