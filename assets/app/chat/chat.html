@@ -1,19 +1,25 @@
-
-
 <app-dialog [(visible)]="showDialog">
     <h1>{{dialogName}}</h1>
 
-    <ul *ngFor="let m of mails; let i = index">
-        <div class="my_mails" *ngIf="m.sender == id; else elseBlock"  style="text-align: right;">
-            <li>{{name}}</li>
-            <li>{{m.message}}</li>
-        </div>
-        <ng-template #elseBlock class="your_mails">
-            <li>{{dialogName}}</li>
-            <li>{{m.message}}</li>
-        </ng-template>
+    <div class="conversation">
 
-    </ul>
+
+        <div *ngFor="let m of mails; let i = index">
+
+            <div  *ngIf="m.sender != id;" class="luky">{{name}}:
+                <div class="content">{{m.message}}</div>
+                <!--<div class="message-time">{{m.updatedAt}}</div>-->
+            </div>
+
+
+            <div *ngIf="m.sender == id;" #elseBlock class="krm">{{dialogName}}:
+                <div class="content">{{m.message}}</div>
+                <!--<div class="message-time">{{m.updatedAt}}</div>-->
+            </div>
+
+        </div>
+
+    </div>
 
     <!--{{roomId}}-->
     <!--{{recipient}}-->
