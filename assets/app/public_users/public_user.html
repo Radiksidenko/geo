@@ -3,7 +3,8 @@
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel='stylesheet prefetch'
       href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch'
+      href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
 <app-dialog [(visible)]="showDialog">
 
     <form ngNoForm action="upload_photo_user" enctype="multipart/form-data" method="post">
@@ -20,12 +21,7 @@
                 <div class="col-sm-9">
                     <h2><strong>{{name}} {{surname}}</strong></h2>
                 </div>
-                <div class="col-sm-3">
-                    <div class="button-email pull-right">
-                        <a class="btn btn-outline-success btn-sm" (click)="editing=!editing">Edit Profile <i
-                                class="fa fa-pencil"></i></a>
-                    </div>
-                </div>
+
             </div>
         </div>
 
@@ -67,11 +63,7 @@
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-slideshare fa-stack-1x fa-inverse"></i>
             </span></a>
-                    <a href="/public_user?ID={{id}}">
-            <span class="fa-stack">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa  fa-map-pin fa-stack-1x fa-inverse"></i>
-            </span></a>
+
 
                 </div>
             </div>

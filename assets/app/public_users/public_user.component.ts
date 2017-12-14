@@ -1,12 +1,13 @@
 import {Component} from "@angular/core";
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
     //selector: 'user-profile',
-    templateUrl: 'app/user-profile/user-profile.html',
-    styleUrls: ['app/user-profile/user-profile.css']
+    templateUrl: 'app/public_users/public_user.html',
+    styleUrls: ['app/public_users/public_user.css']
 })
 
-export class UserProfileComponent {
+export class public_userComponent {
 
     name: string;
     surname: string;
@@ -27,10 +28,12 @@ export class UserProfileComponent {
     editing: boolean = false;
 
 
-    constructor() {
+    constructor(private activateRoute: ActivatedRoute) {
+        var cvID = activateRoute.snapshot.queryParams['ID'];
+
         var reference = this;
 
-        io.socket.get('/getuser_me', function gotResponse(body, response) {
+        io.socket.get('/getuser?ID='+cvID, function gotResponse(body, response) {
             reference.name = body.name;
             reference.surname = body.surname;
             reference.gender = body.gender;

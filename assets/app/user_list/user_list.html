@@ -1,0 +1,51 @@
+<div style="height: 50px"></div>
+<div class="row">
+
+    <!--<div class="col-md-12" *ngFor="let u of user_list;">-->
+        <!--<div class="media">-->
+            <!--<a class="pull-left" [routerLink]="['/public_user']" [queryParams]="{ ID: u.id }">-->
+                <!--<img class="media-object img-circle" src="{{u.gravatarUrl}}" style="width: 100px;height:100px;">-->
+            <!--</a>-->
+            <!--<div class="media-body">-->
+                <!--<h4 class="media-heading">{{u.name}} {{u.surname}}</h4>-->
+                <!--<h5>{{u.about_myself}}</h5>-->
+                <!--<hr style="margin:8px auto">-->
+                <!--<br>-->
+                <!--<a [routerLink]="['/public_user']" [queryParams]="{ ID: u.id }"><span class="label label-danger">see profile</span></a>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <div class="column is-4" *ngFor="let u of user_list;">
+        <div class="card" *ngIf="u.id!=id">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            <img  src="{{u.gravatarUrl}}" alt="Image" class="round">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-5">{{u.name}} {{u.surname}}</p>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <h5>{{u.about_myself}}</h5>
+                    <button class="label label-success" (click)="send_messages(u.id)">Send Messages</button>
+
+                    <small><a [routerLink]="['/public_user']" [queryParams]="{ ID: u.id }">see profile</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'>
+
+
+<div style="height: 250px"></div>

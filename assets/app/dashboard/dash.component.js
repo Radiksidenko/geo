@@ -126,7 +126,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     io.socket.get('/get_my_point', function gotResponse(body, response) {
                         reference.test_marker = body;
                         reference.status = 'myPrivat';
-                        console.log(reference.status);
+                        console.log(body);
                     });
                 }
                 showPublic() {

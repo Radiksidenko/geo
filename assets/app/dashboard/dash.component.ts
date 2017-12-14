@@ -142,7 +142,7 @@ export class DashComponent {
         io.socket.get('/get_my_point', function gotResponse(body, response) {
             reference.test_marker = body;
             reference.status = 'myPrivat';
-            console.log(reference.status);
+            console.log(body);
 
         });
     }

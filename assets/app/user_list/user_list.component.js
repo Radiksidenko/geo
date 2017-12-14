@@ -1,4 +1,4 @@
-System.register(["@angular/core"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/router"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,34 +10,23 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, UserProfileComponent;
+    var core_1, router_1, user_listComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }
         ],
         execute: function () {
-            UserProfileComponent = class UserProfileComponent {
-                constructor() {
-                    this.editing = false;
+            user_listComponent = class user_listComponent {
+                constructor(router) {
+                    this.router = router;
+                    this.user_list = [];
                     var reference = this;
                     io.socket.get('/getuser_me', function gotResponse(body, response) {
-                        reference.name = body.name;
-                        reference.surname = body.surname;
-                        reference.gender = body.gender;
-                        reference.date_of_birth = body.date_of_birth;
-                        reference.country = body.country;
-                        reference.city = body.city;
-                        reference.phone = body.phone;
-                        reference.web_site = body.web_site;
-                        reference.interests = body.interests;
-                        reference.about_myself = body.about_myself;
-                        reference.role = body.role;
-                        reference.email = body.email;
-                        reference.password = body.password;
-                        reference.lastLoggedIn = body.lastLoggedIn;
-                        reference.gravatarUrl = body.gravatarUrl;
                         reference.id = body.id;
                     });
                     io.socket.get("/ready", function (ready) {
@@ -51,25 +40,28 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     io.socket.on('disconnect', function () {
                         console.log('Disconnect');
                     });
+                    io.socket.get('/user_list', function gotResponse(body, response) {
+                        reference.user_list = body;
+                        console.log(reference.user_list);
+                    });
                     setInterval(function () {
                     }, 10);
                 }
-                update(type, value) {
-                    io.socket.post('/update', { [type]: value }, function (resData, jwRes) {
-                        console.log(jwRes.statusCode); // => 200
-                    });
+                send_messages(recipientId) {
+                    io.socket.post('/create_room', { recipient: recipientId });
+                    this.router.navigate(['/chat']);
                 }
             };
-            UserProfileComponent = __decorate([
+            user_listComponent = __decorate([
                 core_1.Component({
                     //selector: 'user-profile',
-                    templateUrl: 'app/user-profile/user-profile.html',
-                    styleUrls: ['app/user-profile/user-profile.css']
+                    templateUrl: 'app/user_list/user_list.html',
+                    styleUrls: ['app/user_list/user_list.css']
                 }),
-                __metadata("design:paramtypes", [])
-            ], UserProfileComponent);
-            exports_1("UserProfileComponent", UserProfileComponent);
+                __metadata("design:paramtypes", [router_1.Router])
+            ], user_listComponent);
+            exports_1("user_listComponent", user_listComponent);
         }
     };
 });
-//# sourceMappingURL=user-profile.component.js.map
+//# sourceMappingURL=user_list.component.js.map

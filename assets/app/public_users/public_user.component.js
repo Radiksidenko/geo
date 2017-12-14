@@ -1,4 +1,4 @@
-System.register(["@angular/core"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/router"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,19 +10,24 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, UserProfileComponent;
+    var core_1, router_1, public_userComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }
         ],
         execute: function () {
-            UserProfileComponent = class UserProfileComponent {
-                constructor() {
+            public_userComponent = class public_userComponent {
+                constructor(activateRoute) {
+                    this.activateRoute = activateRoute;
                     this.editing = false;
+                    var cvID = activateRoute.snapshot.queryParams['ID'];
                     var reference = this;
-                    io.socket.get('/getuser_me', function gotResponse(body, response) {
+                    io.socket.get('/getuser?ID=' + cvID, function gotResponse(body, response) {
                         reference.name = body.name;
                         reference.surname = body.surname;
                         reference.gender = body.gender;
@@ -60,16 +65,16 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     });
                 }
             };
-            UserProfileComponent = __decorate([
+            public_userComponent = __decorate([
                 core_1.Component({
                     //selector: 'user-profile',
-                    templateUrl: 'app/user-profile/user-profile.html',
-                    styleUrls: ['app/user-profile/user-profile.css']
+                    templateUrl: 'app/public_users/public_user.html',
+                    styleUrls: ['app/public_users/public_user.css']
                 }),
-                __metadata("design:paramtypes", [])
-            ], UserProfileComponent);
-            exports_1("UserProfileComponent", UserProfileComponent);
+                __metadata("design:paramtypes", [router_1.ActivatedRoute])
+            ], public_userComponent);
+            exports_1("public_userComponent", public_userComponent);
         }
     };
 });
-//# sourceMappingURL=user-profile.component.js.map
+//# sourceMappingURL=public_user.component.js.map

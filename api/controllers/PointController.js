@@ -11,44 +11,46 @@ module.exports = {
     point: function (req, res) {
         console.log('point');
         Point.create({
-            x: req.param('x'),
-            y: req.param('y'),
-            lable: req.param('lable'),
-            name: req.param('name'),
-            type: 'public',
-            owner: req.session.me
-        },
+                x: req.param('x'),
+                y: req.param('y'),
+                lable: req.param('lable'),
+                name: req.param('name'),
+                type: 'public',
+                owner: req.session.me
+            },
             function pointCreated(err, point) {
-            if (err) {
-                console.log('Error: ' + err);
-                return res.negotiate(err);
-            }
+                if (err) {
+                    console.log('Error: ' + err);
+                    return res.negotiate(err);
+                }
 
-            console.log('point Added');
-            //sails.sockets.broadcast('funSockets', 'hello', point);
-            return res.json(point);
-        })
+                console.log('point Added');
+                //sails.sockets.broadcast('funSockets', 'hello', point);
+                return res.json(point);
+            })
     },
     privatePoint: function (req, res) {
         console.log('point');
+        if (req.session.me) {
 
-        Point.create({
+            Point.create({
 
-            x: req.param('x'),
-            y: req.param('y'),
-            lable: req.param('lable'),
-            name: req.param('name'),
-            type: 'private',
-            owner: req.session.me
-        }, function pointCreated(err,point) {
-            if (err) {
-                console.log('Error: ' + err);
-                return res.negotiate(err);
-            }
-            console.log('private point Added');
+                x: req.param('x'),
+                y: req.param('y'),
+                lable: req.param('lable'),
+                name: req.param('name'),
+                type: 'private',
+                owner: req.session.me
+            }, function pointCreated(err, point) {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return res.negotiate(err);
+                }
+                console.log('private point Added');
 
-            return res.json(point);
-        })
+                return res.json(point);
+            })
+        }
     },
 
     getPoint: function (req, res) {
@@ -60,11 +62,33 @@ module.exports = {
             if (err) {
                 res.negotiate(err);
             }
-            sails.sockets.join(req, 'PointRoom');
-            sails.sockets.broadcast('PointRoom', 'allPoint', point);
-            return res.json(point);
-        })
+            var owner = [];
+            for (var i = 0; i < point.length; i++) {
+                owner[i] = point[i].owner;
+            }
+            // console.log(owner);
+            var firstQuery = {
+                where: {id: owner},
+                select: ['name', 'id']
+            };
+            User.find(firstQuery, function (err, user) {
+                if (err) {
+                    res.negotiate(err);
+                }
+                for (let m of point) {
+                    for (u of user) {
+                        if (u.id == m.owner) {
+                            m['ownerName'] = (u.name);
+                        }
+                    }
 
+                }
+console.log(point)
+                sails.sockets.join(req, 'PointRoom');
+                sails.sockets.broadcast('PointRoom', 'allPoint', point);
+                return res.json(point);
+            })
+        })
 
     },
     getMyPrivatePoint: function (req, res) {

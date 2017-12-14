@@ -117,28 +117,38 @@ module.exports = {
     },
     update: function (req, res) {
         var data = req.allParams();
-        User.update({id: req.session.me,}, data).exec(function afterwards(err, updated) {
+        if (req.session.me) {
 
-            if (err) {
-                // handle error here- e.g. `res.serverError(err);`
-                return;
-            }
-            console.log('Updated user to have name ' + updated[0].id);
-        });
+            User.update({id: req.session.me,}, data).exec(function afterwards(err, updated) {
+
+                if (err) {
+                    // handle error here- e.g. `res.serverError(err);`
+                    return;
+                }
+                console.log('Updated user to have name ' + updated[0].id);
+            });
+        } else {
+            return "You are NOT logged in";
+        }
+
     },
     upload_photo_user: function (req, res) {
+        const path = require('path');
         if (!req.session.me) {
             console.log("error  -> UserController.js -> upload_photo");
         } else {
             req.file('avatar').upload({
-                    dirname: require('path').resolve(sails.config.appPath, 'assets' + path.sep + 'images' + path.sep + 'photo')
+                    dirname: sails.config.appPath + path.sep + 'assets' + path.sep + 'images' + path.sep + 'photo'
+
                 },
                 function (err, files) {
                     if (err)
                         return res.serverError(err);
-                    const path = require('path');
-                    var gravatarUrl = 'images/photo/' + files[0].fd.split(path.sep).pop();
 
+                    var gravatarUrl = 'images/photo/' + files[0].fd.split(path.sep).pop();
+                    console.log('*****************')
+                    console.log(files)
+                    console.log('*****************')
 
                     User.update({id: req.session.me}, {gravatarUrl: gravatarUrl}).exec(function afterwards(err, updated) {
 
@@ -153,6 +163,25 @@ module.exports = {
             );
 
         }
+    },
+
+    user_list: function (req, res) {
+        if (!req.session.me) {
+            return res.view('login');
+        } else {
+
+            var firstQuery = {
+                select: ['name', 'email', 'gravatarUrl', 'id', 'surname', 'about_myself']
+            };
+            User.find(firstQuery, function (err, user) {
+                if (err) {
+                    res.negotiate(err);
+                }
+
+                return res.send(user);
+            })
+        }
     }
+
 
 }
