@@ -43,7 +43,7 @@ export class UserProfileComponent {
             reference.about_myself = body.about_myself;
             reference.role = body.role;
             reference.email = body.email;
-            reference.password = body.password;
+            reference.id = body.id;
             reference.lastLoggedIn = body.lastLoggedIn;
             reference.gravatarUrl = body.gravatarUrl;
         });
