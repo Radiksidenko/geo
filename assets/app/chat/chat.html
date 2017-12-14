@@ -27,9 +27,34 @@
     <!--<button class="but" (click)="add(); showDialog=!showDialog">OK</button>-->
 
 </app-dialog>
-<ul *ngFor="let m of room;">
-    <li>{{m.name}}</li>
 
-    <button class="butu" (click)="show_messages(m.id,m.name,m.recipient);showDialog=true">Send Messages</button>
-</ul>
 
+
+
+<div class="row">
+
+    <div class="column is-4" *ngFor="let m of room;">
+        <div class="card" >
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-5">{{m.name}}</p>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <button class="butu" (click)="show_messages(m.id,m.name,m.recipient);showDialog=true">Send Messages</button>
+                    <small><a [routerLink]="['/public_user']" [queryParams]="{ ID: m.recipient }">see profile</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css'>
+
+
+<div style="height: 250px"></div>
