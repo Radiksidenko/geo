@@ -6,15 +6,17 @@ import { HttpModule }      from '@angular/http';
 import { AgmCoreModule} from 'angular2-google-maps/core';
 import { routing } from './app.routes';
 import { DashComponent }      from './dashboard/dash.component';
+import { user_listComponent }      from './user_list/user_list.component';
 
 import {UserProfileComponent} from "./user-profile/user-profile.component";
+import {chatComponent} from "./chat/chat.component";
 import {DialogComponent} from './modal/dialog.component';
 
 const googleMapsCore = AgmCoreModule.forRoot({
     apiKey : 'AIzaSyBGDB6yrcAbiygl1ONUANsMXP8gAV9Vc3M',
 });
 @NgModule({
-    declarations: [AppComponent,DashComponent,UserProfileComponent,DialogComponent],
+    declarations: [AppComponent,DashComponent,UserProfileComponent,DialogComponent,chatComponent,user_listComponent],
     imports:      [routing,BrowserModule,HttpModule, googleMapsCore,FormsModule ],
     bootstrap:    [AppComponent],
 })

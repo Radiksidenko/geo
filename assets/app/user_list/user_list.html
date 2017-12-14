@@ -1,0 +1,10 @@
+
+<ul *ngFor="let u of user_list;">
+    <li>{{u.id}}</li>
+    <li>{{u.name}}</li>
+    <li>{{u.surname}}</li>
+    <button class="butu" (click)="send_messages(u.id)">Send Messages</button>
+
+</ul>
+
+<div style="height: 250px"></div>

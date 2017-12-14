@@ -117,14 +117,20 @@ module.exports = {
     },
     update: function (req, res) {
         var data = req.allParams();
-        User.update({id: req.session.me,}, data).exec(function afterwards(err, updated) {
+        if (req.session.me) {
 
-            if (err) {
-                // handle error here- e.g. `res.serverError(err);`
-                return;
-            }
-            console.log('Updated user to have name ' + updated[0].id);
-        });
+            User.update({id: req.session.me,}, data).exec(function afterwards(err, updated) {
+
+                if (err) {
+                    // handle error here- e.g. `res.serverError(err);`
+                    return;
+                }
+                console.log('Updated user to have name ' + updated[0].id);
+            });
+        } else {
+            return "You are NOT logged in";
+        }
+
     },
     upload_photo_user: function (req, res) {
         const path = require('path');
@@ -157,6 +163,25 @@ module.exports = {
             );
 
         }
+    },
+
+    user_list: function (req, res) {
+        if (!req.session.me) {
+            return res.view('login');
+        } else {
+
+            var firstQuery = {
+                select: ['name', 'email', 'gravatarUrl', 'id', 'surname', 'about_myself']
+            };
+            User.find(firstQuery, function (err, user) {
+                if (err) {
+                    res.negotiate(err);
+                }
+
+                return res.send(user);
+            })
+        }
     }
+
 
 }

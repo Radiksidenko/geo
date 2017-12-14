@@ -55,6 +55,10 @@ module.exports = {
         },
         gravatarUrl:{
             type:'string'
+        },
+        room:{
+            type: 'JSON',
+            defaultsTo: null
         }
     }
 };

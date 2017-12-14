@@ -14,10 +14,10 @@
 module.exports.connections = {
     mainMySQL: {
         adapter: 'sails-mysql',
-        host: 'us-cdbr-iron-east-05.cleardb.net',
-        user: 'b94d60d32294f6',
-        password: '909f8aa9',
-        database: 'heroku_a4dbc5c42274c3b',
+        host: 'tk3mehkfmmrhjg0b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        user: 'dyoy7i31u259xtre',
+        password: 'eaq3a63qv11hmpz3',
+        database: 'dwb2pm8d9a5cvmiy',
         timezone: 'utc'
     },
     localDiskDb: {

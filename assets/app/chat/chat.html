@@ -1,0 +1,29 @@
+
+
+<app-dialog [(visible)]="showDialog">
+    <h1>{{dialogName}}</h1>
+
+    <ul *ngFor="let m of mails; let i = index">
+        <div class="my_mails" *ngIf="m.sender == id; else elseBlock"  style="text-align: right;">
+            <li>{{name}}</li>
+            <li>{{m.message}}</li>
+        </div>
+        <ng-template #elseBlock class="your_mails">
+            <li>{{dialogName}}</li>
+            <li>{{m.message}}</li>
+        </ng-template>
+
+    </ul>
+
+    <!--{{roomId}}-->
+    <!--{{recipient}}-->
+    <input (keyup.enter)="send_messages(messag.value);messag.value=''" type="search" #messag>
+    <!--<button class="but" (click)="add(); showDialog=!showDialog">OK</button>-->
+
+</app-dialog>
+<ul *ngFor="let m of room;">
+    <li>{{m.name}}</li>
+
+    <button class="butu" (click)="show_messages(m.id,m.name,m.recipient);showDialog=true">Send Messages</button>
+</ul>
+
