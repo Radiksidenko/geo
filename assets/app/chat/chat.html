@@ -6,13 +6,13 @@
 
         <div *ngFor="let m of mails; let i = index">
 
-            <div  *ngIf="m.sender != id;" class="luky">{{name}}:
+            <div  *ngIf="m.sender == id;" class="luky">{{name}}:
                 <div class="content">{{m.message}}</div>
                 <!--<div class="message-time">{{m.updatedAt}}</div>-->
             </div>
 
 
-            <div *ngIf="m.sender == id;" #elseBlock class="krm">{{dialogName}}:
+            <div *ngIf="m.sender != id;" #elseBlock class="krm">{{dialogName}}:
                 <div class="content">{{m.message}}</div>
                 <!--<div class="message-time">{{m.updatedAt}}</div>-->
             </div>

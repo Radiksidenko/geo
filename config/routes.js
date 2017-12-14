@@ -6,6 +6,8 @@ module.exports.routes = {
     'GET /signup': {view: 'signup'},
     'GET /dashboard': 'DashController.checkUser',
     'GET /getuser': 'DashController.getUser_by_id',
+    'GET /public_user': 'DashController.checkUser',
+
     'GET /getuser_me': 'DashController.getUser',
     'GET /logout': 'UserController.logout',
     'POST /point': 'PointController.point',

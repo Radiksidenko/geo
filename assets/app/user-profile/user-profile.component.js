@@ -38,8 +38,10 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                         reference.password = body.password;
                         reference.lastLoggedIn = body.lastLoggedIn;
                         reference.gravatarUrl = body.gravatarUrl;
+                        reference.id = body.id;
                     });
-                    io.socket.get("/ready", function (ready) { });
+                    io.socket.get("/ready", function (ready) {
+                    });
                     io.socket.on('connect', function () {
                         console.log('Connect');
                     });
