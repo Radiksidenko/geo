@@ -26,6 +26,9 @@ System.register(["@angular/core", "@angular/router"], function (exports_1, conte
                     this.router = router;
                     this.user_list = [];
                     var reference = this;
+                    io.socket.get('/getuser_me', function gotResponse(body, response) {
+                        reference.id = body.id;
+                    });
                     io.socket.get("/ready", function (ready) {
                     });
                     io.socket.on('connect', function () {

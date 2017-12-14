@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {Router} from '@angular/router';
+
 @Component({
     //selector: 'user-profile',
     templateUrl: 'app/user_list/user_list.html',
@@ -9,11 +10,14 @@ import {Router} from '@angular/router';
 export class user_listComponent {
 
     user_list = [];
+    id;
 
     constructor(private router: Router) {
         var reference = this;
 
-
+        io.socket.get('/getuser_me', function gotResponse(body, response) {
+            reference.id = body.id;
+        });
 
         io.socket.get("/ready", function (ready) {
         });
@@ -38,8 +42,9 @@ export class user_listComponent {
         }, 10);
 
     }
-    send_messages(recipientId){
-        io.socket.post('/create_room',{recipient: recipientId});
+
+    send_messages(recipientId) {
+        io.socket.post('/create_room', {recipient: recipientId});
         this.router.navigate(['/chat'])
     }
 
