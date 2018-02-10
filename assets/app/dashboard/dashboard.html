@@ -41,34 +41,43 @@
     <div>
         <span class="place"><h1><strong>{{commentsName}}</strong></h1></span>
         <ul class="list-group" *ngFor="let m of markerComments; let i = index">
-            <div class="description" *ngIf="m.type == 'description'; else elseBlock">
+            <div class="description" *ngIf="m.type == 'description'">
                 <li class="description-auth">
                     <!--<img class="description-avat" src={{gravatarUrl}}>-->
                     {{m.name}}
                 </li>
                 <li class="description-text" *ngIf="m.comments">{{m.comments}}</li>
             </div>
-            <ng-template class="comment" #elseBlock>
-                <li class="comment-auth">
+            <div class="" *ngIf="m.type == 'point'">
+                <li class="">
                     <!--<img class="description-avat" src={{gravatarUrl}}>-->
                     {{m.name}}
                 </li>
                 <li class="comment-text">{{m.comments}}</li>
-            </ng-template>
+            </div>
+
+            <div class="description" *ngIf="m.type == 'photo'">
+                <img class="rounded-circle" src={{m.comments}}>
+            </div>
 
         </ul>
     </div>
     <textarea type="text" placeholder="Text" #comments></textarea>
 
     <button class="butu" (click)="addComments(commentsId,comments.value,'point');comments.value=''">Add</button>
+    <form ngNoForm action="upload_photoComments?ID={{commentsId}}" enctype="multipart/form-data" method="post">
+        <input type="file" name="photo"><br>
+        <input value="{{commentsId}}" name="point" disabled>
+        <input type="submit" value="Upload">
+    </form>
 </app-dialog>
 <header class="flex hero">
     <div class="flex-left">
         <div class="btn-round ripple menu" (click)="leftmtnu()"></div>
     </div>
-     <div class="flex center d-o">
-     <input placeholder="Search Stories"/>
-     </div>
+    <div class="flex center d-o">
+        <input placeholder="Search Stories"/>
+    </div>
     <div class="flex-right">
         <!--<div title="Google Apps" class="btn-round ripple apps d-o"></div>-->
         <!--<div title="Google Notifications" class="btn-round ripple notifications d-o"></div>-->
@@ -106,7 +115,7 @@
 
 
     <sebm-google-map-marker
-            *ngFor="let m of test_marker; let i = index"
+            *ngFor="let m of test_marker; trackBy: trackByFn; let i = index;"
             [latitude]="m.x"
             [longitude]="m.y"
             [iconUrl]="m.owner == id ? m.lable=='Pr'?'/images/private.png':'/images/my_public.png':'/images/public.png'">
@@ -114,7 +123,9 @@
         <sebm-google-map-info-window [isOpen]="open[i]">
             <h4><strong>{{m.name}}</strong>({{m.ownerName}})</h4>
             <button class="butu" *ngIf="m.owner == id" (click)="dell(m.id)">dell</button>
-            <button class="butu" (click)="showCommentsF(m.id,m.name+' ('+m.ownerName+')');showComments=!showComments">Add comments</button>
+            <button class="butu" (click)="showCommentsF(m.id,m.name+' ('+m.ownerName+')');showComments=!showComments">
+                Add comments
+            </button>
 
         </sebm-google-map-info-window>
 

@@ -49,6 +49,10 @@ export class DashComponent {
         }, 10);
     }
 
+    trackByFn(index, item) {
+        return index; // or item.id
+    };
+
     update(type: string, value) {
         io.socket.post('/update', {[type]: value}, function (resData, jwRes) {
             console.log(jwRes.statusCode); // => 200

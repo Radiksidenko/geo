@@ -50,6 +50,10 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     setInterval(function () {
                     }, 10);
                 }
+                trackByFn(index, item) {
+                    return index; // or item.id
+                }
+                ;
                 update(type, value) {
                     io.socket.post('/update', { [type]: value }, function (resData, jwRes) {
                         console.log(jwRes.statusCode); // => 200
